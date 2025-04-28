@@ -14,3 +14,4 @@ BUENAS
 ## AREAS
 - secciones donde se atienden los servicios
 - el sistema las configura con descripcion, codigo: string que las identifica, y una serie de ventanillas que posee el area
+- una cola de prioridad con los tiquetes
