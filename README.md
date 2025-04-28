@@ -18,6 +18,7 @@ BUENAS
   - VENTANILLAS
   - nombre que es el codigo concatenado con un consecutivo. ejemplo C como nombre y 4 ventanillas entonces c1 c2 c3 c4
   - Tiene que tener un espacio para mostrar el codigo del tiquete que se atiende
+  - por consulta de estadisticas: contador de cantidad de tiquetes atendidos para cada ventanilla
 - por la consulta de estadisticas: tener un contador de tiquetes atendidos
 
 ## TIQUETE  
@@ -49,3 +50,6 @@ BUENAS
 ## Consulta de estadisticas
 - Tiempo promedio de espera por cada area
   - llevar control del tiempo que toma a cada tiquete en ser atendido y cantidad de tiquetes atendidos en un area.
+- Cantidad de tiquetes dispensados por area
+  - control de esa info
+- Cantidad de tiquetes atendidos por ventanilla 
