@@ -18,6 +18,7 @@ BUENAS
   - VENTANILLAS
   - nombre que es el codigo concatenado con un consecutivo. ejemplo C como nombre y 4 ventanillas entonces c1 c2 c3 c4
   - Tiene que tener un espacio para mostrar el codigo del tiquete que se atiende
+-por la consulta de estadisticas: tener un contador de tiquetes atendidos
 
 ## TIQUETE  
 - codigo: codigo del area y un consecutivo global, consecutivo empieza en 100. NUNCA se genera uno con un diferente numero de area y mismo consecutivo
@@ -45,4 +46,6 @@ BUENAS
 - Si se borra un area se eliminan todos los servicios y las ventanillas
 - Dar un mensaje de advertencia y solicitar confirmacion antes de borrar.
 
-##Consulta de estadisticas
+## Consulta de estadisticas
+- Tiempo promedio de espera por cada area
+  - llevar control del tiempo que toma a cada tiquete en ser atendido y cantidad de tiquetes atendidos en un area.
