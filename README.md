@@ -20,10 +20,11 @@ BUENAS
 - no puede tener una lista de servicios. tiene que jalar de la lista ya existente de servicios.
   
   - ## VENTANILLAS
+una lista de pares que asocia el nombre de la ventanilla con el nombre del ticket
   - nombre que es el codigo concatenado con un consecutivo. ejemplo C como nombre y 4 ventanillas entonces c1 c2 c3 c4
   - Tiene que tener un espacio para mostrar el codigo del tiquete que se atiende
   - por consulta de estadisticas: contador de cantidad de tiquetes atendidos para cada ventanilla
-- por la consulta de estadisticas: tener un contador de tiquetes atendidos
+  - por la consulta de estadisticas: tener un contador de tiquetes atendidos
 
 ## TIQUETE  
 - codigo: codigo del area y un consecutivo global, consecutivo empieza en 100. NUNCA se genera uno con un diferente numero de area y mismo consecutivo
@@ -93,6 +94,20 @@ siempre mostrar las opciones al usuario y cada opcion debe de ser de facil inter
       - Elimina un tipo de usuario del sistema. luego de realizar la accion se mantiene en el menu de tipos de usuario.
     - Regresar
       - regresa al menu de administracion
+  - ### Areas
+    - Agregar
+      - Agrega una nueva area con su respectiva desccripcion, codigo y cantidad de ventanillas y la agreaga a la lista de areas del sistema.
+      - Crea automaticamente la lista de ventanillas con sus codigos
+      - Luego de la accion se mantiene en el menu de areas
+    - Modificar cantidad de ventanillas.
+      - Se solicita un area existente dentro del sistema, muestra la cantidad de ventanillas actuales y solicita un nuevo numero de ventanillas.
+      - Borra las anteriores "clear" y las crea denuevo segun la solicitud del usuario.
+      - Se mantiene en el menu areas luego de hacer la accion
+    - Eliminar
+      - Elimina un area y todas sus ventanillas asociadas. Si hay servicios relacionados con el area que se boora, tambien se eliminan
+      - Se muestra la lista de servicios que desaparecerian si se borra el area.
+      - Tambien debe pedirse confirmacion al usuario antes de hacerlo.
+      - Se mantiene en el menu areas luego de hacer la accion
   - ### Servicios disponibles
     - Agregar
       - agrega un nuevo servicio con su descripcion, area de atencion y prioridad
@@ -107,4 +122,10 @@ siempre mostrar las opciones al usuario y cada opcion debe de ser de facil inter
       - Luego de realizar la accion se mantiene en el menu de servicios disponibles.
     - Regresar
       - regresa al menu de administracion.
-      - 
+ - ### Limpiar cola y estadisticas
+   - Limpiar cola y estadisticas
+     - Elimina los contenidos de todas las colas de prioridad, los tiquetes atendidos en ventanillas y los datos de las estadisticas registrados hasta el momento.
+     - Es un reinicio del sistema que no afecta tipos de usuario, servicios ni areas
+     - Luego de hacer la accion vuelve al menu de administracion
+   - Regresar
+     - 
