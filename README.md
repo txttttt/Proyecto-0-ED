@@ -40,8 +40,8 @@ BUENAS
 
 ## Ventanilla atiene tiquete
 - ingresa el codigo de la ventanilla que atiende el tiquete
-- extrae tiquete del area al que pertenece ventanilla
-- actualiza el codigo siendo atendido
+- extrae tiquete de la cola prioridad del area al que pertenece ventanilla
+- actualiza el codigo del tiquete siendo atendido
 - registra la hora en que fue atendido.
 
 ## Administracion del sistema
@@ -63,5 +63,17 @@ BUENAS
 
 # ESTRUCTURA SUGERIDA PARA MENU
 siempre mostrar las opciones al usuario y cada opcion debe de ser de facil interaccion.
-1. Estado de las colas
-   -
+- 1. Estado de las colas
+   - Muestra areas existentes
+   - Cantidad de ventanillas por cada area
+   - Codigos de los tiquetes presentes en las colas
+   - Cada ventanilla muestra el codigo del ultimo tiquete atendido.
+   - opcion para regresar al menu principal
+- 2. Tiquetes
+   - Seleccionar tipo de cliente
+     - Muestra la lista de tipos de usuarios para escojer uno sin mostrar las prioridades. Usuario selecciona el tipo de cliente que es
+   - Seleccionar tipo de servicio
+     - Muestra la lista de servicios, el orden de esta lista no debe ser fija ni por areas, se configura en el sistema.
+     - Usuario seleciona un servicio y el sistema genera el tiquete y lo inserta en la cola de prioridad respectiva
+     - Imprime todos los datos del tiquete
+     - Se mantiene en el menu de tiquetes al hacer esta accion
