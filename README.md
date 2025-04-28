@@ -18,7 +18,7 @@ BUENAS
   - VENTANILLAS
   - nombre que es el codigo concatenado con un consecutivo. ejemplo C como nombre y 4 ventanillas entonces c1 c2 c3 c4
   - Tiene que tener un espacio para mostrar el codigo del tiquete que se atiende
--por la consulta de estadisticas: tener un contador de tiquetes atendidos
+- por la consulta de estadisticas: tener un contador de tiquetes atendidos
 
 ## TIQUETE  
 - codigo: codigo del area y un consecutivo global, consecutivo empieza en 100. NUNCA se genera uno con un diferente numero de area y mismo consecutivo
