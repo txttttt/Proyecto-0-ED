@@ -63,13 +63,13 @@ BUENAS
 
 # ESTRUCTURA SUGERIDA PARA MENU
 siempre mostrar las opciones al usuario y cada opcion debe de ser de facil interaccion.
-- 1. Estado de las colas
+- ## 1. Estado de las colas
    - Muestra areas existentes
    - Cantidad de ventanillas por cada area
    - Codigos de los tiquetes presentes en las colas
    - Cada ventanilla muestra el codigo del ultimo tiquete atendido.
    - opcion para regresar al menu principal
-- 2. Tiquetes
+- ## 2. Tiquetes
    - Seleccionar tipo de cliente
      - Muestra la lista de tipos de usuarios para escojer uno sin mostrar las prioridades. Usuario selecciona el tipo de cliente que es
    - Seleccionar tipo de servicio
