@@ -32,3 +32,17 @@ BUENAS
 - hora actual
 - prioridad final 
 - se inserta en la cola prioridad del area
+
+## Ventanilla atiene tiquete
+- ingresa el codigo de la ventanilla que atiende el tiquete
+- extrae tiquete del area al que pertenece ventanilla
+- actualiza el codigo siendo atendido
+- registra la hora en que fue atendido.
+
+## Administracion del sistema
+- agregar o eliminar elementos de listas de tipos de usuario, areas disponibles, ventanillas y servicios disponibles.
+- Si se borra un tipo de usuario o servicio se eliminan todos los tiquetes.
+- Si se borra un area se eliminan todos los servicios y las ventanillas
+- Dar un mensaje de advertencia y solicitar confirmacion antes de borrar.
+
+##Consulta de estadisticas
