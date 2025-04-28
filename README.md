@@ -15,3 +15,7 @@ BUENAS
 - secciones donde se atienden los servicios
 - el sistema las configura con descripcion, codigo: string que las identifica, y una serie de ventanillas que posee el area
 - una cola de prioridad con los tiquetes
+  - VENTANILLAS
+  - nombre que es el codigo concatenado con un consecutivo. ejemplo C como nombre y 4 ventanillas entonces c1 c2 c3 c4
+  - Tiene que tener un espacio para mostrar el codigo del tiquete que se atiende
+
