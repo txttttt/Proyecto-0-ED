@@ -12,14 +12,8 @@
 
 using std::cout;
 using std::cin;
-using std::stoi;
-using std::ws;
-using std::getline;
 using std::runtime_error;
-using std::invalid_argument;
-using std::out_of_range;
 using std::string;
-using std::numeric_limits;
 
 string const main_menu =
 "\nMenú principal\n"
