@@ -5,16 +5,19 @@ BUENAS
 - "adulto mayor","persona con encesidades especiales","usuario regular","representante organizacional".
 - Tiene que tener descripcion y un numero que representa la prioridad a ser atendido, entre menor el numero mayor la priorirdad
 - El sistema maneja una lista de tipos de usuarios ordenados segun su prioridad
+- por la consulta de estadisticas: tener un contador de tiquetes por cada tipo de usuario.
 
 ## SERVICIO
 - "comprar boleto", "cambiar boleto", "solicitar informacion", "realizar reclamo" 
 - Tiene que tener una descripcion y un numero que representa la prioridad del servicio y el area donde se atienede
 - ordenada segun se quiera configurar.
+- por la consulta de estadisticas: contador de tiquete por cada servicio disponible.
 
 ## AREAS
 - secciones donde se atienden los servicios
 - el sistema las configura con descripcion, codigo: string que las identifica, y una serie de ventanillas que posee el area
 - una cola de prioridad con los tiquetes
+  
   - ## VENTANILLAS
   - nombre que es el codigo concatenado con un consecutivo. ejemplo C como nombre y 4 ventanillas entonces c1 c2 c3 c4
   - Tiene que tener un espacio para mostrar el codigo del tiquete que se atiende
@@ -52,4 +55,13 @@ BUENAS
   - llevar control del tiempo que toma a cada tiquete en ser atendido y cantidad de tiquetes atendidos en un area.
 - Cantidad de tiquetes dispensados por area
   - control de esa info
-- Cantidad de tiquetes atendidos por ventanilla 
+- Cantidad de tiquetes atendidos por ventanilla
+  - para cada ventanilla en especifico
+- Cantidad de tiquetes solicitados por servicio
+  - para cada servicio en especifico
+- Cantidad de tiquetes emitidos por cada tipo de usuario
+
+# ESTRUCTURA SUGERIDA PARA MENU
+siempre mostrar las opciones al usuario y cada opcion debe de ser de facil interaccion.
+1. Estado de las colas
+   -
