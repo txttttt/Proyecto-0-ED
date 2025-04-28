@@ -17,6 +17,7 @@ BUENAS
 - secciones donde se atienden los servicios
 - el sistema las configura con descripcion, codigo: string que las identifica, y una serie de ventanillas que posee el area
 - una cola de prioridad con los tiquetes
+- no puede tener una lista de servicios. tiene que jalar de la lista ya existente de servicios.
   
   - ## VENTANILLAS
   - nombre que es el codigo concatenado con un consecutivo. ejemplo C como nombre y 4 ventanillas entonces c1 c2 c3 c4
@@ -77,3 +78,33 @@ siempre mostrar las opciones al usuario y cada opcion debe de ser de facil inter
      - Usuario seleciona un servicio y el sistema genera el tiquete y lo inserta en la cola de prioridad respectiva
      - Imprime todos los datos del tiquete
      - Se mantiene en el menu de tiquetes al hacer esta accion
+   - Regresar a menu
+- ## 3. Atender
+  - Solicita al usuario area y numero de ventanilla
+  - busca en la cola respectiva el siguiente en ser atendido, lo elimina de la cola y lo asigna como tiquete que se esta atendiendo.
+  - Actualiza los datos necesario para que se refleje en las estadisticas.
+  - Si no hay ningun elemento en la cola debe indicar que no hay usuarios en espera, luego de realizar la accion regresa al menu principal.
+- ## 4. Administracion
+  - ### Tipos de usuario
+    - Agregar
+      - agrega un tipo de usuario con su nombre y prioridad a la lista de tipos de usuario del sistema, ordena la lista segun priordad.
+      - Luego de realizar la accion se mantiene en el menu de tipos de usuario.
+    - Eliminar
+      - Elimina un tipo de usuario del sistema. luego de realizar la accion se mantiene en el menu de tipos de usuario.
+    - Regresar
+      - regresa al menu de administracion
+  - ### Servicios disponibles
+    - Agregar
+      - agrega un nuevo servicio con su descripcion, area de atencion y prioridad
+      - se mantiene en el menu de servicios disponibles luego de hacer la accion
+    - Eliminar
+      - Muestra la lista de servicios disponibles y elige uno para eliminarlo
+      - Deben borrarse todos los tiquetes de las cosas de todas las areas.
+      - Luego de realizar la accion se mantiene en el menu de servicios disponinbles.
+    - Reordenar
+      - Permite al usuario reordenar los elementos en la lista de servicios. Solicita el numero de servicio a reubicar y la posicion destino.
+      - Solo hay una lista de servicios y no se debe de aprupar por area ni por otro criterio.
+      - Luego de realizar la accion se mantiene en el menu de servicios disponibles.
+    - Regresar
+      - regresa al menu de administracion.
+      - 
