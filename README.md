@@ -128,4 +128,9 @@ siempre mostrar las opciones al usuario y cada opcion debe de ser de facil inter
      - Es un reinicio del sistema que no afecta tipos de usuario, servicios ni areas
      - Luego de hacer la accion vuelve al menu de administracion
    - Regresar
-     - 
+     - regresa al menu principal sin realizar ninguna accion
+- ### Estadisticas del sistema
+  - Se muestran todas las estadisticas explicadas anteriormente de una forma clara y concisa.
+  - Se espera a que el usario presione alguna tecla para regresar al menu principal.
+- ### Salir
+  - Abandonar el programa 
