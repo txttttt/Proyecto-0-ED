@@ -23,3 +23,7 @@ BUENAS
 - codigo: codigo del area y un consecutivo global, consecutivo empieza en 100. NUNCA se genera uno con un diferente numero de area y mismo consecutivo
 - Hora en que fueron solicitados, tiempo de espera para ser atendidos se calcula luego.
 - Prioridad final: PrioridadTiquete = PrioridadUsuario * 10 + PrioridadServicio
+
+# FUNCIONALIDADES DEL SISTEMA
+## Solicitud de un tiquete
+- selecciona tipo de usuario, servicio a usar, genera tiquete con el codigo, hora actual, prioridad final y se inserta en la cola prioridad del area
