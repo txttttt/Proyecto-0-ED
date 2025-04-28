@@ -26,4 +26,9 @@ BUENAS
 
 # FUNCIONALIDADES DEL SISTEMA
 ## Solicitud de un tiquete
-- selecciona tipo de usuario, servicio a usar, genera tiquete con el codigo, hora actual, prioridad final y se inserta en la cola prioridad del area
+- selecciona tipo de usuario
+- servicio a usar
+- genera tiquete con el codigo
+- hora actual
+- prioridad final 
+- se inserta en la cola prioridad del area
