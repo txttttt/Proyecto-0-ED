@@ -17,7 +17,6 @@ private:
 
 public:
 	Service() {
-
 	}
 
 	Service(string description, string area, int priority) {
@@ -27,7 +26,6 @@ public:
 	}
 
 	~Service() {
-
 	}
 
 	void setDescription(string description) {
