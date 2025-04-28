@@ -21,7 +21,7 @@ string const main_menu =
 "0. Estado de las colas\n"
 "1. Tiquetes\n"
 "2. Atender\n"
-"3. Administracion\n"
+"3. Administración\n"
 "4. Estadísticas del sistema\n"
 "5. Salir\n"
 "---------------------------------\n"

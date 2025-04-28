@@ -145,7 +145,7 @@
     <ClInclude Include="OrderedArrayList.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="Queue.h" />
-    <ClInclude Include="Servicio.h" />
+    <ClInclude Include="Service.h" />
     <ClInclude Include="SortedArrayList.h" />
   </ItemGroup>
   <ItemGroup>

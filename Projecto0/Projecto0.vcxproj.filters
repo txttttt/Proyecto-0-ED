@@ -72,7 +72,7 @@
     <ClInclude Include="SortedArrayList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Servicio.h">
+    <ClInclude Include="Service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -167,10 +167,10 @@ public:
 		return -1;
 	}
 
-	bool contains(E elemnent) {
+	bool contains(E element) {
 		if (size == 0)
 			throw runtime_error("List is empty.");
-		Node<E>* temp = head->next;
+		DNode<E>* temp = head->next;
 		for (int i = 0; i < size; i++) {
 			if (temp->element == element)
 				return true;
