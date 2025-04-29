@@ -16,10 +16,9 @@ private:
 	int priority;
 
 public:
-	/* Quitar comentario si da problema
+
 	Service() {
 	}
-	*/
 
 	Service(string description, string area, int priority) {
 		this->description = description;

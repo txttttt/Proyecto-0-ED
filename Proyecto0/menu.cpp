@@ -95,7 +95,7 @@ void runningLoop(void (*f)(bool&, int&)) {
 	}
 }
 
-void getTicket(bool& running, int& input, )
+void getTicket(bool& running, int& input) {}
 
 /* Creado por Javier Lee Liang
 * Muestra el menú de tiquetes y recibe un entero de parte del usuario que indica la acción a realizar
