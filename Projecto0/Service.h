@@ -1,5 +1,5 @@
 /* Clase creada por Javier Lee Liang
-* Esta clase es una abstracción de cómo un servicio opera dentro del sistema de atención al cliente
+* Esta clase es una abstracciÃ³n de cÃ³mo un servicio opera dentro del sistema de atenciÃ³n al cliente
 */
 #pragma once
 
@@ -16,8 +16,10 @@ private:
 	int priority;
 
 public:
+	/*
 	Service() {
 	}
+	*/
 
 	Service(string description, string area, int priority) {
 		this->description = description;
