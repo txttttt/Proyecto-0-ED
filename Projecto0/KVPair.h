@@ -25,6 +25,14 @@ public:
 		key = other.key;
 		value = other.value;
 	}
+
+	K getKey() {
+		return key;
+	}
+
+	V getValue() {
+		return value;
+	}
 	
 	void operator=(const KVPair<K, V>& other) {
 		key = other.key;
