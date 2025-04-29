@@ -24,12 +24,12 @@ public:
 		this->finalPriority = finalPriority;
 	}
 
-	void setCode(code) {
+	void setCode(string code) {
 		this->code = code;
 	}
 
 	string getCode() {
-		reutrn code;
+		return code;
 	}
 
 	void setHour(float hour) {
@@ -37,7 +37,7 @@ public:
 	}
 
 	float getHour() {
-		reutrn hour;
+		return hour;
 	}
 
 	void setFinalPriority(int fp) {
