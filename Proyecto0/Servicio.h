@@ -1,5 +1,5 @@
 /* Clase creada por Javier Lee Liang
-* Esta clase es una abstracción de cómo un servicio opera dentro del sistema de atención al cliente
+* Esta clase es una abstracciÃ³n de cÃ³mo un servicio opera dentro del sistema de atenciÃ³n al cliente
 */
 #pragma once
 
@@ -10,10 +10,15 @@ using std::ostream;
 using std::string;
 
 class Service {
-public:
+private:
 	string description;
 	string area;
 	int priority;
+
+public:
+
+	Service() {
+	}
 
 	Service(string description, string area, int priority) {
 		this->description = description;
@@ -22,7 +27,30 @@ public:
 	}
 
 	~Service() {
+	}
 
+	void setDescription(string description) {
+		this->description = description;
+	}
+
+	void setArea(string area) {
+		this->area = area;
+	}
+
+	void setPriority(int priority) {
+		this->priority = priority;
+	}
+
+	string getDescription() {
+		return description;
+	}
+
+	string getArea() {
+		return area;
+	}
+
+	int getPriority() {
+		return priority;
 	}
 
 	void operator=(const Service& other) {
@@ -56,7 +84,7 @@ public:
 	}
 };
 
-ostream& operator<<(ostream& os, const Service& service) {
-	return os << "(" << service.description << ", " << service.area << ", " << service.priority << ")";
+ostream& operator<<(ostream& os, Service& service) {
+	return os << "(" << service.getDescription() << ", " << service.getArea() << ", " << service.getPriority() << ")";
 }
 
