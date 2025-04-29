@@ -25,26 +25,26 @@ public:
 	}
 
 	void setCode(code) {
-	this->code = code;
+		this->code = code;
 	}
-	
+
 	string getCode() {
-	return code;
+		reutrn code;
 	}
 
 	void setHour(float hour) {
-	this->hour = hour;	
+		this->hour = hour;
 	}
 
 	float getHour() {
-	return hour;
+		reutrn hour;
 	}
 
 	void setFinalPriority(int fp) {
-		this->finalPriority = fp;	
+		this->finalPriority = fp;
 	}
 
 	int getFinalPriority() {
-	reutrn finalPriority;
+		return finalPriority;
 	}
-}
+};
