@@ -17,6 +17,7 @@ Dar un mensaje de advertencia y solicitar confirmacion antes de borrar.
 #include "ArrayList.h"
 #include "Ticket.h"
 #include "KVPair.h"
+#include "Service.h"
 
 using std::string;
 using std::cout;
@@ -27,18 +28,70 @@ using std::runtime_error;
 class AdminSystem
 {
 private:
-	ArrayList<KVPair<int, string>>* types;
+	ArrayList<KVPair<string, int>>* types;
+	ArrayList<Ticket>* tickets;
+	ArrayList<Service>* services;
 
 public:
-	void addType(int priority, string description) {
-		
+	void addType(string description, int priority) {
+		KVPair<string, int>* pair = new KVPair<string, int>(description, priority);
+		if (!types->contains(*pair)) {
+			types->append(*pair);
+		}
 	}
-//Solicitud de un tiquete
 
-//Ventanilla tiene a tiquete
+	void deleteType(string description) {
+		for (int i; i < types->getSize(); i++) {
+			types->goToPos(i);
+			KVPair<string, int> pair = types->getElement();
+			string desc = pair.getKey();
+			if (desc == description) {
+				types->remove();
+				tickets->clear();
+			}
+		}
+	}
 
-// Administracion del sistema
+	void addTicket(string code, float hour, int finalPriority) {
+		Ticket* ticket = new Ticket(code, hour, finalPriority);
+		if (!tickets->contains(*ticket))
+			tickets->append(*ticket);
+	}
 
-// Consulta de estadisticas
+	void deleteTicket(string code) {
+		for (int i; i < tickets->getSize(); i++) {
+			tickets->goToPos(i);
+			if (tickets->getElement().getCode() == code)
+				tickets->remove();
+		}
+	}
+
+	void addService(string description, string area, int priority) {
+		for (int i; i < services->getSize(); i++) {
+			services->goToPos(i);
+			if (services->getElement().getDescription() == description) {
+				Service* service = new Service(description, area, priority);
+				services->append(*service);
+			}
+		}
+	}
+
+	void deleteService(string description) {
+		for (int i; i < services->getSize(); i++) {
+			services->goToPos(i);
+			if (services->getElement().getDescription() == description) {
+				services->remove();
+				tickets->clear();
+			}
+		}
+	}
+
+	//Solicitud de un tiquete
+
+	//Ventanilla tiene a tiquete
+
+	// Administracion del sistema
+
+	// Consulta de estadisticas
 };
 
