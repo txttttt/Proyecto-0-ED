@@ -39,10 +39,11 @@ int main() {
 	AdmControl->addService("Desc4", "Area4", 7);
 	AdmControl->addService("Desc5", "Area5", 2);
 	*/
+	
 	AdmControl->addType("Adulto Mayor", 1);
-	AdmControl->addType("Persona con nececidades especiales", 2);
-	AdmControl->addType("Usuario regular", 3);
-	AdmControl->addType("Representante organizacional", 0);
+	//AdmControl->addType("Persona con nececidades especiales", 2);
+	//AdmControl->addType("Usuario regular", 3);
+	//AdmControl->addType("Representante organizacional", 0);
 
 
 	runningLoop(&getMenuAction);

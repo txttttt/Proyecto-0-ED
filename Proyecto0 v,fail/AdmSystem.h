@@ -28,15 +28,15 @@ using std::runtime_error;
 class AdmSystem
 {
 private:
-	ArrayList<KVPair<string, int>>* types;
-	ArrayList<Ticket>* tickets;
-	ArrayList<Service>* services;
+	List<KVPair<string, int>>* types;
+	List<Ticket>* tickets;
+	List<Service>* services;
 
 public:
 	AdmSystem() {
-		List<Ticket>* tickets = new ArrayList<Ticket>();
-		List<Service>* services = new ArrayList<Service>();
-		List<KVPair<string, int>>* types = new ArrayList<KVPair<string, int>>();
+		tickets = new ArrayList<Ticket>();
+		services = new ArrayList<Service>();
+		types = new ArrayList<KVPair<string, int>>();
 	}
 	~AdmSystem() {
 		delete services;
@@ -44,11 +44,13 @@ public:
 		delete types;
 	}
 	
-
 	void addType(string description, int priority) {
-		KVPair<string, int>* pair = new KVPair<string, int>(description, priority);
-		if (!types->contains(*pair)) {
-			types->append(*pair);
+		KVPair<string, int> pair = KVPair<string, int>(description, priority);
+		if (types->getSize() == 0) {
+			types->append(pair);
+		}
+		else if (!types->contains(pair)) {
+			types->append(pair);
 		}
 	}
 
