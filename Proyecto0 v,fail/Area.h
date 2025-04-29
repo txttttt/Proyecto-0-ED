@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include "List.h"
 #include "LinkedPriorityQueue.h"
 #include "Ticket.h"
 
@@ -23,7 +24,7 @@ private:
 	string description;
 	string code;
 	int numCounter;
-	LinkedPriorityQueue<Tiquete>* tiquetes;
+	List<Ticket>* tiquetes;
 
 public:
 	Area() {
@@ -33,17 +34,17 @@ public:
 		this->codigo = codigo;
 		this->description = description;
 		this->numVentanillas = numVentanillas;
-		tiquetes = new LinkedPriorityQueue<Tiquete>();
+		tiquetes = new LinkedPriorityQueue<Ticket>();
 	}
 
 	~Area() {
 	}
 
-	void setDescription(String description) {
+	void setDescription(string description) {
 		this->description = description;
 	}
 
-	String getDescription() {
+	string getDescription() {
 		return description;
 	}
 
@@ -51,7 +52,7 @@ public:
 		this->code = code;
 	}
 
-	String getCode() {
+	string getCode() {
 		return code;
 	}
 
@@ -59,7 +60,7 @@ public:
 		this->numCounter = numCounter;
 	}
 
-	String getNumCounter() {
+	string getNumCounter() {
 		return numCounter;
 	}
 };
