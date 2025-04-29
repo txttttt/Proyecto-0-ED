@@ -9,7 +9,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "LinkedPriorityQueue.h"
-#include "Tiquete.h"
+#include "Ticket.h"
 
 using std::string;
 using std::cout;
