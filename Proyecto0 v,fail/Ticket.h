@@ -17,7 +17,8 @@ private:
 	float hour;
 	int finalPriority;
 public:
-	Ticket(){}
+	Ticket(){
+	}
 	Ticket(string code, float hour, int finalPriority) {
 		this->code = code;
 		this->hour = hour;
