@@ -133,4 +133,9 @@ siempre mostrar las opciones al usuario y cada opcion debe de ser de facil inter
   - Se muestran todas las estadisticas explicadas anteriormente de una forma clara y concisa.
   - Se espera a que el usario presione alguna tecla para regresar al menu principal.
 - ### Salir
-  - Abandonar el programa 
+  - Abandonar el programa
+# POSTDATA
+Gente, revisé la clase donde el profe explica todo y no estoy seguro si hay que cambiar algo en nuestros planes:
+- Un area puede atender muchos servicios, cada servicio es atendidio en un area, entonces un area puede tener una lista de servicios que hace, es necesario que la lista se pueda reordenar.
+- Un area tiene una cantidad de ventanillas (personalizable) donde la cola de prioridad de area se va a atender.
+- Hay que cambiar la hora a la que se pide un tiquete a time o calendar (o lo que haya en C++)
