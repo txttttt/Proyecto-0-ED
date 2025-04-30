@@ -19,11 +19,10 @@ Dar un mensaje de advertencia y solicitar confirmacion antes de borrar.
 #include "Ticket.h"
 #include "Service.h"
 
-using std::string;
 using std::cout;
 using std::endl;
+using std::string;
 using std::runtime_error;
-
 
 class AdmSystem
 {

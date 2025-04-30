@@ -34,6 +34,6 @@ int main() {
 	AdmControl->addType("Usuario regular", 3);
 	AdmControl->addType("Representante organizacional", 0);
 
-	runningLoop(&getMenuAction);
+	runningLoop(&getMainMenuAction);
 	return 0;
 }

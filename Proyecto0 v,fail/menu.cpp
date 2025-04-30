@@ -95,12 +95,39 @@ void runningLoop(void (*f)(bool&, int&)) {
 	}
 }
 
-void getTicket(bool& running, int& input) {}
+/* Creado por Javier Lee Liang
+* Muestra el menú principal y recibe un entero de parte del usuario que indica la acción a realizar
+* una accion dentro del programa
+* @param running Referencia a un booleano indicando si el programa ya terminó o no
+* @param input Referencia a un entero para guardar un entero que el usuario ingrese
+*/
+void getMainMenuAction(bool& running, int& input) {
+	getInt(main_menu, input);
+	switch (input) {
+	case 0:
+		break;
+	case 1:
+		runningLoop(&getTicketMenuAction);
+		break;
+	case 2:
+		break;
+	case 3:
+		runningLoop(&getAdminMenuAction);
+		break;
+	case 4:
+		break;
+	case 5:
+		running = false;
+		break;
+	}
+}
 
 /* Creado por Javier Lee Liang
 * Muestra el menú de tiquetes y recibe un entero de parte del usuario que indica la acción a realizar
+* @param running Referencia a un booleano indicando si el programa ya terminó o no
+* @param input Referencia a un entero para guardar un entero que el usuario ingrese
 */
-void getTicketAction(bool& running, int& input) {
+void getTicketMenuAction(bool& running, int& input) {
 	getInt(ticket_menu, input);
 	switch (input) {
 	case 0:
@@ -112,10 +139,18 @@ void getTicketAction(bool& running, int& input) {
 	}
 }
 
+void getUserTypeAndService(bool& running, int& input) {
+	cout << "1. Adulto mayor\n";
+	getInt("Seleccione un tipo de usuario: ", input);
+	
+}
+
 /* Creado por Javier Lee Liang
 * Muestra el menú de usuarios y recibe un entero de parte del usuario que indica la acción a realizar
+* @param running Referencia a un booleano indicando si el programa ya terminó o no
+* @param input Referencia a un entero para guardar un entero que el usuario ingrese
 */
-void getUsersAction(bool& running, int& input) {
+void getUsersOptionsAction(bool& running, int& input) {
 	getInt(users_options, input);
 	switch (input) {
 	case 0:
@@ -130,8 +165,10 @@ void getUsersAction(bool& running, int& input) {
 
 /* Creado por Javier Lee Liang
 * Muestra el menú de áreas y recibe un entero de parte del usuario que indica la acción a realizar
+* @param running Referencia a un booleano indicando si el programa ya terminó o no
+* @param input Referencia a un entero para guardar un entero que el usuario ingrese
 */
-void getAreasAction(bool& running, int& input) {
+void getAreasOptionsAction(bool& running, int& input) {
 	getInt(areas_options, input);
 	switch (input) {
 	case 0:
@@ -148,8 +185,10 @@ void getAreasAction(bool& running, int& input) {
 
 /* Creado por Javier Lee Liang
 * Muestra el menú de áreas y recibe un entero de parte del usuario que indica la acción a realizar
+* @param running Referencia a un booleano indicando si el programa ya terminó o no
+* @param input Referencia a un entero para guardar un entero que el usuario ingrese
 */
-void getServicesAction(bool& running, int& input) {
+void getServicesOptionsAction(bool& running, int& input) {
 	getInt(services_options, input);
 	switch (input) {
 	case 0:
@@ -166,48 +205,24 @@ void getServicesAction(bool& running, int& input) {
 
 /* Creado por Javier Lee Liang
 * Muestra el menú de administración y recibe un entero de parte del usuario que indica la acción a realizar
+* @param running Referencia a un booleano indicando si el programa ya terminó o no
+* @param input Referencia a un entero para guardar un entero que el usuario ingrese
 */
-void getAdminAction(bool& running, int& input) {
+void getAdminMenuAction(bool& running, int& input) {
 	getInt(admin_menu, input);
 	switch (input) {
 	case 0:
-		runningLoop(&getUsersAction);
+		runningLoop(&getUsersOptionsAction);
 		break;
 	case 1:
-		runningLoop(&getAreasAction);
+		runningLoop(&getAreasOptionsAction);
 		break;
 	case 2:
-		runningLoop(&getServicesAction);
+		runningLoop(&getServicesOptionsAction);
 		break;
 	case 3:
 		break;
 	case 4:
-		running = false;
-		break;
-	}
-}
-
-/* Creado por Javier Lee Liang
-* Muestra el menú principal y recibe un entero de parte del usuario que indica la acción a realizar 
-* una accion dentro del programa
-* @param running Referencia a una variable booleana creada indicando si el programa está corriendo o no
-*/
-void getMenuAction(bool& running, int& input) {
-	getInt(main_menu, input);
-	switch (input) {
-	case 0:
-		break;
-	case 1:
-		runningLoop(&getTicketAction);
-		break;
-	case 2:
-		break;
-	case 3:
-		runningLoop(&getAdminAction);
-		break;
-	case 4:
-		break;
-	case 5:
 		running = false;
 		break;
 	}
