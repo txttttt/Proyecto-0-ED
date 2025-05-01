@@ -77,8 +77,8 @@ public:
 		Node<E>* temp = front->next;
 		cout << "[";
 		while (temp != nullptr){
-			temp = temp->next;
 			cout << temp->element << " ";
+			temp = temp->next;
 		}
 		cout << "]" << endl;
 	}
