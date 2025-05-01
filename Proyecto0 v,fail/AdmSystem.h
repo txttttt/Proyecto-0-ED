@@ -76,29 +76,38 @@ public:
 			KVPair<string, int> pair = types->getElement();
 			string desc = pair.getKey();
 			if (desc == description) {
-				cout << "Esta seguro de que desea eliminar el tipo de usuario " << description << "? (s/n)";
 				char confirm;
-				cin >> confirm;
+				do {
+					cout << "¿Está seguro de que desea eliminar el tipo de usuario " << description << "? (s/n): ";
+					cin >> confirm;
+				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
+
 				if (confirm == 's' || confirm == 'S') {
 					types->remove();
-					//tickets->clear();
 					cout << "Tipo de usuario eliminado." << endl;
 				}
 				else {
-					cout << "Eliminacion cancelada." << endl;
+					cout << "Eliminación cancelada." << endl;
 				}
 				return;
 			}
 		}
 		cout << "Tipo de usuario no encontrado." << endl;
 	}
+
 	/*Método para imprimir la lista de types
 	* llama al metodo print de arraylist
 	*/
 	void printTypes() {
-		cout << "Lista de Tipos:" << endl;
-		types->print();
+		if (types->getSize() == 0) {
+			cout << "No hay tipos de usuario registrados." << endl;
+		}
+		else {
+			cout << "Lista de Tipos:" << endl;
+			types->print();
+		}
 	}
+
 	/*
 	* Agrega un nuevo tiquete en el sistema
 	* @param code Hilera que representa el código del tiquete a agregar
@@ -126,19 +135,38 @@ public:
 		for (int i = 0; i < tickets->getSize(); i++) {
 			tickets->goToPos(i);
 			if (tickets->getElement().getCode() == code) {
-				tickets->remove();
-				cout << "Tiquete eliminado." << endl;
+				char confirm;
+				do {
+					cout << "¿Está seguro de que desea eliminar el tiquete " << code << "? (s/n): ";
+					cin >> confirm;
+				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
+
+				if (confirm == 's' || confirm == 'S') {
+					tickets->remove();
+					cout << "Tiquete eliminado." << endl;
+				}
+				else {
+					cout << "Eliminación cancelada." << endl;
+				}
 				return;
 			}
 		}
 		cout << "Tiquete no encontrado." << endl;
 	}
+
 	// Método para imprimir la lista de Tickets
 	// LLama al metodo print de arraylist
 	void printTickets() {
-		cout << "Lista de Tickets:" << endl;
-		tickets->print();
+		if (tickets->getSize() == 0) {
+			cout << "No hay tiquetes registrados." << endl;
+		}
+		else {
+			cout << "Lista de Tiquetes:" << endl;
+			tickets->print();
+		}
 	}
+
+
 	/*
 	* Agrega un nuevo servicio al sistema
 	* @param descripction Hilera con la descripción del servicio a agregar
@@ -166,16 +194,19 @@ public:
 		for (int i = 0; i < services->getSize(); i++) {
 			services->goToPos(i);
 			if (services->getElement().getDescription() == description) {
-				cout << "Esta seguro de que desea eliminar el servicio" << description << "? (s/n)" << endl;
 				char confirm;
-				cin >> confirm;
+				do {
+					cout << "¿Esta seguro de que desea eliminar el servicio " << description << "? (s/n): ";
+					cin >> confirm;
+				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
+
 				if (confirm == 's' || confirm == 'S') {
 					services->remove();
 					tickets->clear();
-					cout << "Serivico eliminado." << endl;
+					cout << "Servicio eliminado." << endl;
 				}
 				else {
-					cout << "Eliminacion cancelada" << endl;
+					cout << "Eliminacion cancelada." << endl;
 				}
 				return;
 			}
@@ -183,12 +214,19 @@ public:
 		cout << "Servicio no encontrado." << endl;
 	}
 
+
 	// Método para imprimir la lista de servicios
 	// Llama al método print de ArrayList
 	void printServices() {
-		cout << "Lista de Servicios:" << endl;
-		services->print();
+		if (services->getSize() == 0) {
+			cout << "No hay servicios registrados." << endl;
+		}
+		else {
+			cout << "Lista de Servicios:" << endl;
+			services->print();
+		}
 	}
+
 	/*
 	* Genera un entero según el tipo de cliente y el servicio que el cliente posee
 	* @param userPriority Entero indicando la prioridad del tipo de cliente
