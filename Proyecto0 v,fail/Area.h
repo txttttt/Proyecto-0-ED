@@ -1,4 +1,4 @@
-/* Clase creada por Kevin Jimenez Escalante
+/* Clase creada por Kevin Jimenez Escalante y Fabian Solis Izaguirre
 * Esta clase es la implementacion de las areas
 */
 
