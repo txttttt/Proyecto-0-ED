@@ -9,6 +9,7 @@
 #include <string>
 #include <limits>
 #include "Header.h"
+/*#include "AdmSystem.h";*/
 
 using std::cout;
 using std::cin;
@@ -82,12 +83,12 @@ string const services_options =
 * 
 * Fuente de cómo aprendí a hacer esto: https://www.geeksforgeeks.org/passing-a-function-as-a-parameter-in-cpp/
 */
-void runningLoop(void (*f)(bool&, int&)) {
+void runningLoop(void (*f)(bool&, int&/*, AdmSystem&*/ )) {
 	bool running = true;
 	int input;
 	while (running) {
 		try {
-			f(running, input);
+			f(running, input/*, admin*/);
 		}
 		catch (const runtime_error& e) {
 			cout << e.what() << '\n';
@@ -115,12 +116,23 @@ void getMainMenuAction(bool& running, int& input) {
 		runningLoop(&getAdminMenuAction);
 		break;
 	case 4:
+		/*runningLoop(&getEstadisticas); */
 		break;
 	case 5:
 		running = false;
 		break;
 	}
 }
+
+/* Creado por Kevin Jimenez Escalante
+* Muestra el tiempo de espera de tiquetes por area y cantidad de tiquetes por area, ventanilla, servicio y tipo de usuario
+* @param running Referencia a un booleano indicando si el programa ya terminó o no
+* @param input Referencia a un entero para guardar un entero que el usuario ingrese
+*/
+/*void getEstadisticas(bool& running, int& input) {
+
+	running = false;
+}*/
 
 /* Creado por Javier Lee Liang
 * Muestra el menú de tiquetes y recibe un entero de parte del usuario que indica la acción a realizar

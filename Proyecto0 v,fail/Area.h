@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
 #include "List.h"
 #include "LinkedPriorityQueue.h"
 #include "Ticket.h"
@@ -19,8 +20,11 @@ using std::cout;
 using std::endl;
 using std::runtime_error;
 using std::to_string;
+// Se hace uso de la libreria time, en AdmSystem se provee mas informacion
+using std::time;
+using std::time_t;
 
-template <typename E>
+//template <typename E>
 class Area
 {
 private:
@@ -66,17 +70,23 @@ public:
 		initializeCounters(); // Regenera la lista de ventanillas cada vez que cambia el número de ventanillas
 	}
 
-
-	string getNumCounter() {
+	int getNumCounter() {
 		return numCounter;
 	}
 
 	void addTicket(Ticket ticket) {// Inserta el tiquete en la cola de prioridad del área
 		tickets->insert(ticket, ticket.getFinalPriority());
 	}
+
 	Ticket attendNextTicket() {
 		if (tickets->getSize() != 0) {
-			return tickets->removeMin(); // Atiende el siguiente tiquete en orden de prioridad
+			// Esto hay que ponerlo en estadisticas, hay que guardarlo en una lista o algo similar
+			time_t now;
+			time(&now);
+			Ticket ticket = tickets->removeMin();
+			int tiempoEsperaSegundos = difftime(now, ticket.getCreation());
+			cout << "Tiempo de espera en horas: " << float(tiempoEsperaSegundos) / 3600 << endl;
+			return ticket; // Atiende el siguiente tiquete en orden de prioridad
 		}
 		throw std::runtime_error("No hay tiquetes en espera.");
 	}
@@ -109,4 +119,13 @@ public:
 		}
 	}
 
+	void printTickets() {
+		if (tickets->getSize() == 0) {
+			cout << "No hay tiquetes registrados." << endl;
+		}
+		else {
+			cout << "Lista de Tiquetes:" << endl;
+			tickets->print();
+		}
+	}
 };

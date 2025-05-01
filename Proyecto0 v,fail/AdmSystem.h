@@ -1,10 +1,16 @@
 /* Clase creada por Kevin Jimenez Escalante y Fabian Solis Izaguirre
-* Esta clase se encarga de controlar varios aspectos como los tipos de usuarios
+Esta clase se encarga de controlar varios aspectos como los tipos de usuarios.
 
 agregar o eliminar elementos de listas de tipos de usuario, areas disponibles, ventanillas y servicios disponibles.
 Si se borra un tipo de usuario o servicio se eliminan todos los tiquetes.
-Si se borra un area se eliminan todos los servicios y las ventanillas
+Si se borra un area se eliminan todos los servicios y las ventanillas.
 Dar un mensaje de advertencia y solicitar confirmacion antes de borrar.
+
+Se da uso de la libreria time para calcular la cantidad de tiempo que tarda en atenderse un ticket.
+time_t es para declarar que se van a usar timestamps y time es para hacer uno con el tempo actual.
+
+Informacion general: https://en.cppreference.com/w/cpp/chrono/c/ctime
+Crear timestamp con tiempo actual: https://www.w3schools.com/cpp/cpp_date.asp
 */
 
 #pragma once
@@ -13,9 +19,12 @@ Dar un mensaje de advertencia y solicitar confirmacion antes de borrar.
 
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
+
 #include "LinkedPriorityQueue.h"
 #include "ArrayList.h"
 #include "KVPair.h"
+
 #include "Ticket.h"
 #include "Service.h"
 
@@ -24,6 +33,8 @@ using std::endl;
 using std::string;
 using std::runtime_error;
 using std::cin;
+using std::time;
+using std::time_t;
 
 class AdmSystem
 {
@@ -114,8 +125,9 @@ public:
 	* @param finalPriority Entero que representa la prioridad
 	* Despliega un mensaje si el tiquete ya existe
 	*/
-	void addTicket(string code, float hour, int finalPriority) {
-		Ticket ticket = Ticket(code, hour, finalPriority);
+	void addTicket(string code, int finalPriority) {
+
+		Ticket ticket = Ticket(code, finalPriority);
 		if (tickets->getSize() == 0)
 			tickets->append(ticket);
 		else if (!tickets->contains(ticket))

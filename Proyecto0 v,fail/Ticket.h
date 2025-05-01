@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
+#include <string>
 #include "LinkedPriorityQueue.h"
 
 using std::string;
@@ -14,22 +16,28 @@ using std::cout;
 using std::endl;
 using std::runtime_error;
 using std::ostream;
+// Se hace uso de la libreria time, en AdmSystem se provee mas informacion
+using std::time;
+using std::time_t;
 
 class Ticket {
 private:
+	// Creation el el instante de tiempo en el que se instancio un nuevo ticket
+	time_t creation;
 	string code;
-	float hour;
 	int finalPriority;
 public:
 	Ticket() {}
-	Ticket(string code, float hour, int finalPriority) {
+	Ticket(string code, int finalPriority) {
+		time_t now;
+		time(&now);
 		this->code = code;
-		this->hour = hour;
+		this->creation = now;
 		this->finalPriority = finalPriority;
 	}
 	Ticket(const Ticket& other) { // constructor para listas o colas
 		code = other.code;
-		hour = other.hour;
+		creation = other.creation;
 		finalPriority = other.finalPriority;
 	}
 
@@ -41,12 +49,12 @@ public:
 		return code;
 	}
 
-	void setHour(float hour) {
-		this->hour = hour;
+	void setCreation(time_t creation) {
+		this->creation = creation;
 	}
 
-	float getHour() {
-		return hour;
+	time_t getCreation() {
+		return creation;
 	}
 
 	void setFinalPriority(int fp) {
@@ -67,5 +75,5 @@ public:
 };
 
 ostream& operator<<(ostream& os, Ticket& ticket) {
-	return os << "(" << ticket.getCode() << ", " << ticket.getHour() << ", " << ticket.getFinalPriority() << ")";
+	return os << "(" << ticket.getCode() << ", " << ticket.getCreation() << ", " << ticket.getFinalPriority() << ")";
 }

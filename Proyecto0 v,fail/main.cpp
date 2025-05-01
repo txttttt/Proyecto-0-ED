@@ -13,7 +13,7 @@ using std::string;
 
 /* Creado por Kevin Jimenez y Fabian Solis
 * Función principal para correr el proyecto
-*/
+*
 int main() {
 	// Permite que el sistema pueda soportar texto con tildes y la ñ
 	setlocale(LC_ALL, "");
@@ -37,13 +37,13 @@ int main() {
 	runningLoop(&getMainMenuAction);
 	return 0;
 }
-
+*/
 //Main de pruebas sin pasar por el menu, por si gustan copiarlo y poder usarlo en otro proyecto para probar cosas, Creado por Fabian Solis Izaguirre 
 
-/*#include <iostream>
+#include <iostream>
 #include <stdexcept>
-#include <string>
-#include "AdmSystem.h"
+//#include <string>
+// #include "AdmSystem.h"
 #include "Area.h"
 #include "Counter.h"
 #include "Ticket.h"
@@ -61,7 +61,7 @@ int main() {
     AdmSystem* AdmControl = new AdmSystem();
 
     // Creación de un área con ventanillas
-    Area<Ticket>* serviceArea = new Area<Ticket>("Servicio al Cliente", "S", 3);
+    Area* serviceArea = new Area("Servicio al Cliente", "S", 3);
 
 
     // Agregamos servicios y tipos de cliente
@@ -75,13 +75,14 @@ int main() {
     AdmControl->printTypes();
 
     // Creación de tiquetes y asignación a área
-    Ticket ticket1("S101", 10.30, 5);
-    Ticket ticket2("S102", 10.35, 7);
+    Ticket ticket1("S101", 5);
+    Ticket ticket2("S102", 7);
 
     serviceArea->addTicket(ticket1);
     serviceArea->addTicket(ticket2);
 
     cout << "Tiquetes agregados a la cola de prioridad del area." << endl;
+    serviceArea->printTickets();
 
     // Distribución de tiquetes a ventanillas disponibles
     serviceArea->distributeTicket();
@@ -104,4 +105,3 @@ int main() {
 
     return 0;
 }
-*/
