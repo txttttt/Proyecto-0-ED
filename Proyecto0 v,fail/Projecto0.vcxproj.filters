@@ -84,7 +84,7 @@
     <ClInclude Include="AdmSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ventanilla.h">
+    <ClInclude Include="Counter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

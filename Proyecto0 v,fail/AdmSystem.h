@@ -81,7 +81,6 @@ public:
 					cout << "¿Está seguro de que desea eliminar el tipo de usuario " << description << "? (s/n): ";
 					cin >> confirm;
 				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
-
 				if (confirm == 's' || confirm == 'S') {
 					types->remove();
 					cout << "Tipo de usuario eliminado." << endl;

@@ -132,6 +132,7 @@
     <ClInclude Include="ArrayList.h" />
     <ClInclude Include="ArrayQueue.h" />
     <ClInclude Include="CircleList.h" />
+    <ClInclude Include="Counter.h" />
     <ClInclude Include="Def.h" />
     <ClInclude Include="DLinkedList.h" />
     <ClInclude Include="DNode.h" />
@@ -150,7 +151,6 @@
     <ClInclude Include="Service.h" />
     <ClInclude Include="SortedArrayList.h" />
     <ClInclude Include="Ticket.h" />
-    <ClInclude Include="Ventanilla.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

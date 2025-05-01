@@ -17,6 +17,7 @@ private:
 	int size;
 
 public:
+	LinkedPriorityQueue() {}
 	LinkedPriorityQueue(int priorities) {
 		if (priorities <= 0)
 			throw runtime_error("ERROR: Invalid amount of priorities.");
@@ -89,3 +90,4 @@ public:
 		}
 	}
 };
+

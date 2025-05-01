@@ -115,7 +115,7 @@ public:
 	int getPos() {
 		int pos = 0;
 		Node<E>* temp = head;
-		while (temp != current){
+		while (temp != current) {
 			pos++;
 			temp = temp->next;
 		}
@@ -156,7 +156,7 @@ public:
 		return -1;
 	}
 
-	bool contains(E elemnent) {
+	bool contains(E element) {
 		if (size == 0)
 			throw runtime_error("List is empty.");
 		Node<E>* temp = head->next;
