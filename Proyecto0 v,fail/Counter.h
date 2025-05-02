@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include "Ticket.h"
+
 using std::ostream;
 using std::string;
 
@@ -19,29 +20,25 @@ public:
         ticketsServed = 0;
     }
 
-
     Counter(const string& name) {
         this->name = name;
         ticketsServed = 0;
     }
 
-    // Método para obtener el nombre del contador
     string getName() {
         return name;
     }
 
-    // Método para incrementar el contador de tiquetes atendidos
     void incrementTicketsServed() {
         ticketsServed++;
     }
 
-    // Método para obtener el número de tiquetes atendidos
     int getTicketsServed() {
         return ticketsServed;
     }
 
     void setCurrentTicket(Ticket ticket) {
-        if (currentTicket.getCode().empty()) { // Si no hay un tiquete asignado, lo asigna
+        if (currentTicket.getCode() == "") { // Validación correcta de tiquete vacío
             currentTicket = ticket;
             incrementTicketsServed();
         }
@@ -51,11 +48,11 @@ public:
     }
 
     bool assignTicket(Ticket ticket) {
-        if (currentTicket.getCode().empty()) { // Si la ventanilla está libre
+        if (currentTicket.getCode() == "") { // Evita uso incorrecto de empty()
             setCurrentTicket(ticket);
             return true;
         }
-        return false; // Ventanilla ocupada
+        return false;
     }
 
     void print() {
@@ -67,12 +64,12 @@ public:
     }
 
     bool operator==(const Counter& other) const {
-        return name == other.name; // Compara las ventanillas por nombre
+        return name == other.name;
     }
-
 };
 
 ostream& operator<<(ostream& os, const Counter& counter) {
     return os << "[Ventanilla: " << counter.name
         << ", Tiquetes atendidos: " << counter.ticketsServed << "]";
 }
+

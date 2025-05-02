@@ -104,4 +104,46 @@ int main() {
     delete serviceArea;
 
     return 0;
-}
+};
+
+/*int main() {
+    try {
+        // Inicialización del sistema
+        AdmSystem* admControl = new AdmSystem();
+
+        // Agregar tipos de usuario
+        admControl->addType("Adulto Mayor", 1);
+        admControl->addType("Usuario Regular", 3);
+        admControl->printTypes();
+
+        // Agregar servicios
+        admControl->addService("Atencion General", "A", 5);
+        admControl->addService("Reclamos", "B", 7);
+        admControl->printServices();
+
+        // Generar tiquetes con código dinámico
+        admControl->addTicket("A", "Adulto Mayor", "Atencion General");
+        admControl->addTicket("B", "Usuario Regular", "Reclamos");
+        admControl->addTicket("A", "Usuario Regular", "Atencion General");
+        admControl->printTickets();
+        /*
+        // Intentar generar un tiquete con un tipo de usuario inexistente
+        admControl->addTicket("C", "Estudiante", "Atencion General");
+
+        // Intentar generar un tiquete con un servicio inexistente
+        admControl->addTicket("B", "Usuario Regular", "Tramites Especiales");
+
+        // Verificar que el contador de tiquetes sigue aumentando
+        admControl->addTicket("A", "Adulto Mayor", "Reclamos");
+        admControl->printTickets();
+        
+        // Limpiar memoria
+        delete admControl;
+
+        return 0;
+    }
+    catch (const runtime_error& e) {
+        cout << e.what() << endl;
+    }
+};
+*/

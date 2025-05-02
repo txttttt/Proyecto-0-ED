@@ -20,6 +20,7 @@ Crear timestamp con tiempo actual: https://www.w3schools.com/cpp/cpp_date.asp
 #include <iostream>
 #include <stdexcept>
 #include <ctime>
+#include <string>
 
 #include "LinkedPriorityQueue.h"
 #include "ArrayList.h"
@@ -35,6 +36,7 @@ using std::runtime_error;
 using std::cin;
 using std::time;
 using std::time_t;
+using std::to_string;
 
 class AdmSystem
 {
@@ -42,12 +44,14 @@ private:
 	List<KVPair<string, int>>* types;
 	List<Ticket>* tickets;
 	List<Service>* services;
+	int ticketCounter;
 
 public:
 	AdmSystem() {
 		tickets = new ArrayList<Ticket>();
 		services = new ArrayList<Service>();
 		types = new ArrayList<KVPair<string, int>>();
+		ticketCounter = 100;
 	}
 
 	~AdmSystem() {
@@ -125,16 +129,59 @@ public:
 	* @param finalPriority Entero que representa la prioridad
 	* Despliega un mensaje si el tiquete ya existe
 	*/
-	void addTicket(string code, int finalPriority) {
+	void addTicket(string areaCode, string userType, string serviceDescription) {
+		// Buscar prioridad del tipo de usuario
+		int userPriority = -1;
+		for (int i = 0; i < types->getSize(); i++) {
+			types->goToPos(i);
+			if (types->getElement().getKey() == userType) {
+				userPriority = types->getElement().getValue();
+				break;
+			}
+		}
+		if (userPriority == -1) {
+			cout << "Tipo de usuario no encontrado." << endl;
+			return;
+		}
 
+		// Buscar prioridad del servicio
+		int servicePriority = -1;
+		for (int i = 0; i < services->getSize(); i++) {
+			services->goToPos(i);
+			if (services->getElement().getDescription() == serviceDescription) {
+				servicePriority = services->getElement().getPriority();
+				break;
+			}
+		}
+		if (servicePriority == -1) {
+			cout << "Servicio no encontrado." << endl;
+			return;
+		}
+
+		// Calcular `finalPriority`
+		int finalPriority = userPriority * 10 + servicePriority;
+
+		// Generar código único del tiquete
+		string code = areaCode + to_string(ticketCounter);
+
+		// Crear y agregar el tiquete
 		Ticket ticket = Ticket(code, finalPriority);
-		if (tickets->getSize() == 0)
+		if (tickets->getSize() == 0) {
 			tickets->append(ticket);
-		else if (!tickets->contains(ticket))
+			ticketCounter++;
+			cout << "Tiquete generado: " << ticket << endl;
+		}
+		else if (!tickets->contains(ticket)) {
 			tickets->append(ticket);
-		else
+			ticketCounter++; // Incrementa el contador global
+			cout << "Tiquete generado: " << ticket << endl;
+		}
+		else {
 			cout << "El tiquete ya existe." << endl;
+		}
 	}
+
+
 
 	/*
 	* Elimina un tiquete en el sistema
@@ -236,16 +283,6 @@ public:
 			cout << "Lista de Servicios:" << endl;
 			services->print();
 		}
-	}
-
-	/*
-	* Genera un entero según el tipo de cliente y el servicio que el cliente posee
-	* @param userPriority Entero indicando la prioridad del tipo de cliente
-	* @param servicePriority Entero indicando la prioridad del servicio
-	* @ret Entero con el indicando la prioridad de un cliente según su tipo y servicio
-	*/
-	int formula(int userPriority, int servicePriority) {
-		return userPriority * 10 + servicePriority;
 	}
 
 	//Solicitud de un tiquete
