@@ -2,9 +2,15 @@
 * Esta clase es la implementacion de las areas
 */
 
-#pragma once
+/*
+La keyword friend permite a funciones o clases exteriores visualizar variables privadas
+Esto se hace porque de otro modo parecia no funcionar
+Friend: https://learn.microsoft.com/en-us/cpp/cpp/friend-cpp?view=msvc-170
+Informacion adicional: https://www.geeksforgeeks.org/friend-class-function-cpp/
+*/
 
-#define DEFAULT_MAX 1024
+
+#pragma once
 
 #include <iostream>
 #include <stdexcept>
@@ -20,112 +26,121 @@ using std::cout;
 using std::endl;
 using std::runtime_error;
 using std::to_string;
-// Se hace uso de la libreria time, en AdmSystem se provee mas informacion
+// Se usa `time_t` para el manejo de tiempos en estadísticas
 using std::time;
 using std::time_t;
 
-//template <typename E>
-class Area
-{
+class Area {
 private:
-	string description;
-	string code;
-	int numCounter;
-	LinkedPriorityQueue<Ticket>* tickets;
-	LinkedList<Counter> counters;
+    string description;
+    string code;
+    int numCounter;
+    int totalWaitTime;
+    int attendedTickets;
+    LinkedPriorityQueue<Ticket>* tickets; // Cola de prioridad para tiquetes en el área
+    LinkedList<Counter> counters; // Lista de ventanillas en el área
 
 public:
-	Area() {
-	}
+    Area() {}
 
-	Area(string descripcion, string code, int numCounter) {
-		this->code = code;
-		this->description = description;
-		this->numCounter = numCounter;
-		tickets = new LinkedPriorityQueue<Ticket>(110);
-		initializeCounters();
-	}
+    Area(string description, string code, int numCounter) {
+        this->description = description;
+        this->code = code;
+        this->numCounter = numCounter;
+        tickets = new LinkedPriorityQueue<Ticket>(110);
+        totalWaitTime = 0;
+        attendedTickets = 0;
+        initializeCounters();
+    }
 
-	~Area() {
-	}
+    ~Area() {
+        delete tickets;
+    }
 
-	void setDescription(string description) {
-		this->description = description;
-	}
+    // Métodos de acceso
+    string getDescription() const { return description; }
+    string getCode() const { return code; }
+    int getNumCounter() const { return numCounter; }
 
-	string getDescription() {
-		return description;
-	}
+    void setDescription(string description) { this->description = description; }
+    void setCode(string code) { this->code = code; }
+    void setNumCounter(int numCounter) {
+        this->numCounter = numCounter;
+        initializeCounters(); // Regenera la lista de ventanillas
+    }
 
-	void setCode(string code) {
-		this->code = code;
-	}
+    void initializeCounters() {
+        counters.clear();
+        for (int i = 1; i <= numCounter; i++) {
+            string counterName = code + to_string(i);
+            counters.append(Counter(counterName));
+        }
+    }
 
-	string getCode() {
-		return code;
-	}
+    void addTicket(Ticket ticket) {
+        tickets->insert(ticket, ticket.getFinalPriority());
+    }
 
-	void setNumCounter(int numCounter) {
-		this->numCounter = numCounter;
-		initializeCounters(); // Regenera la lista de ventanillas cada vez que cambia el n�mero de ventanillas
-	}
+    Ticket attendNextTicket() {
+        if (tickets->getSize() != 0) {
+            time_t now;
+            time(&now);
+            Ticket ticket = tickets->removeMin();
+            int waitTimeSeconds = difftime(now, ticket.getCreation());
+            cout << "Tiempo de espera en horas: " << float(waitTimeSeconds) / 3600 << endl;
+            totalWaitTime += waitTimeSeconds;
+            attendedTickets++;
+            return ticket;
+        }
+        throw std::runtime_error("No hay tiquetes en espera.");
+    }
+    /*
+    bool distributeTicket() {
+        if (tickets->getSize() == 0) {
+            cout << "No hay tiquetes en espera." << endl;
+            return false;
+        }
 
-	int getNumCounter() {
-		return numCounter;
-	}
+        Ticket nextTicket = tickets->removeMin();
 
-	void addTicket(Ticket ticket) {// Inserta el tiquete en la cola de prioridad del �rea
-		tickets->insert(ticket, ticket.getFinalPriority());
-	}
+        for (int i = 0; i < counters.getSize(); i++) {
+            counters.goToPos(i);
+            if (counters.getElement().assignTicket(nextTicket)) {
+                cout << "Tiquete " << nextTicket.getCode() << " asignado a " << counters.getElement().getName() << endl;
+                return true;
+            }
+        }
 
-	Ticket attendNextTicket() {
-		if (tickets->getSize() != 0) {
-			// Esto hay que ponerlo en estadisticas, hay que guardarlo en una lista o algo similar
-			time_t now;
-			time(&now);
-			Ticket ticket = tickets->removeMin();
-			int tiempoEsperaSegundos = difftime(now, ticket.getCreation());
-			cout << "Tiempo de espera en horas: " << float(tiempoEsperaSegundos) / 3600 << endl;
-			return ticket; // Atiende el siguiente tiquete en orden de prioridad
-		}
-		throw std::runtime_error("No hay tiquetes en espera.");
-	}
+        cout << "Todas las ventanillas están ocupadas." << endl;
+        return false;
+    }
+    */
 
-	bool distributeTicket() {
-		if (tickets->getSize() == 0) {
-			cout << "No hay tiquetes en espera." << endl;
-			return false;
-		}
+    void printCounters() {
+        cout << "Ventanillas en el área " << code << ":" << endl;
+        counters.print();
+    }
 
-		Ticket nextTicket = tickets->removeMin(); // Extrae el tiquete con mayor prioridad
+    void printTickets() {
+        if (tickets->getSize() == 0) {
+            cout << "No hay tiquetes registrados." << endl;
+        }
+        else {
+            cout << "Lista de Tiquetes:" << endl;
+            tickets->print();
+        }
+    }
 
-		for (int i = 0; i < counters.getSize(); i++) {
-			counters.goToPos(i);
-			if (counters.getElement().assignTicket(nextTicket)) {
-				cout << "Tiquete " << nextTicket.getCode() << " asignado a " << counters.getElement().getName() << endl;
-				return true;
-			}
-		}
+    float averageWaitTime() const {
+        return attendedTickets != 0 ? float(totalWaitTime) / float(attendedTickets) : 0;
+    }
 
-		cout << "Todas las ventanillas est�n ocupadas." << endl;
-		return false;
-	}
+    LinkedList<Counter>& getCounters() { return counters; }
 
-	void initializeCounters() { // inicializa las ventanillas segun el codigo del area
-		counters.clear();
-		for (int i = 1; i <= numCounter; i++) {
-			string counterName = code + to_string(i);
-			counters.append(Counter(counterName));
-		}
-	}
+    bool operator==(const Area& other) const { return code == other.code; }
 
-	void printTickets() {
-		if (tickets->getSize() == 0) {
-			cout << "No hay tiquetes registrados." << endl;
-		}
-		else {
-			cout << "Lista de Tiquetes:" << endl;
-			tickets->print();
-		}
-	}
+    friend ostream& operator<<(ostream& os, const Area& area) {
+        return os << "[Área: " << area.getCode() << ", Descripción: " << area.getDescription()
+            << ", Ventanillas: " << area.getNumCounter() << "]";
+    }
 };
