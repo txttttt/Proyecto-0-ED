@@ -25,6 +25,7 @@ int opcion;
 // para funciones que reciben varios parametros
 string input;
 string input2;
+string input3;
 AdmSystem* control = new AdmSystem();
 
 
@@ -36,19 +37,21 @@ void estadoColas() {
 // TIQUETES
 //-------------------------------------------------------------------------------------------------
 void tiquetes() {
-    cout << "Seleccione el tipo de usuario que es: ";
-
+    getStr("Inserte el area: ", input);
+    getStr("Inserte el tipo de usuario: ", input2);
+    getStr("Inserte la decripcion del servicio: ", input3);
+    control->addTicket(input, input2, input3);
 }
 // ATENDER
 //-------------------------------------------------------------------------------------------------
 void atender() {
     getStr("Inserte el codigo de area: ", input);
     control->attendTicket(input);
-
 }
 // ADMINISTRACION
 //-------------------------------------------------------------------------------------------------
 void tiposUsuario() {
+    control->printTypes();
     cout << users_options;
     getInt("", opcion);
     switch (opcion)
@@ -71,6 +74,7 @@ void tiposUsuario() {
 }
 
 void areas() {
+    control->printAreas();
     cout << users_options;
     getInt("", opcion);
     switch (opcion)
@@ -79,7 +83,7 @@ void areas() {
         getStr("Inserte la descripcion: ", input);
         getStr("Inserte el codigo: ", input);
         getInt("Inserte la prioridad: ", opcion);
-        control->addArea(input, input2 ,opcion);
+        control->addArea(input, input2, opcion);
         break;
     case 1:
         getStr("Inserte la descripcion: ", input);
@@ -94,6 +98,8 @@ void areas() {
 }
 
 void servicios() {
+    control->printServices();
+    cout << "Para crear un nuevo servicio hay que tener al menos un area creada";
     cout << users_options;
     getInt("", opcion);
     switch (opcion)
@@ -117,23 +123,7 @@ void servicios() {
 }
 
 void vaciarColas() {
-    cout << users_options;
-    getInt("", opcion);
-    switch (opcion)
-    {
-    case 0:
-
-        break;
-    case 1:
-
-        break;
-    case 2:
-
-        break;
-    default:
-        cout << "La opcion no existe\n";
-        break;
-    }
+    control->clearAreas();
 }
 
 void administracion() {
@@ -164,42 +154,42 @@ void administracion() {
 // ESTADISTICAS
 //-------------------------------------------------------------------------------------------------
 void estadisticas() {
-    
+
 }
 
 // MAIN
 //-------------------------------------------------------------------------------------------------
 int main() {
-while (true) {
-try {
-    cout << main_menu;
-    getInt("", opcion);
-    switch (opcion)
-    {
-    case 0:
-        estadoColas();
-        break;
-    case 1:
-        tiquetes();
-        break;
-    case 2:
-        atender();
-        break;
-    case 3:
-        administracion();
-        break;
-    case 4:
-        estadisticas();
-        break;
-    case 5:
-        return 0;
-    default:
-        cout << "La opcion no existe\n";
-        break;
+    while (true) {
+        try {
+            cout << main_menu;
+            getInt("", opcion);
+            switch (opcion)
+            {
+            case 0:
+                estadoColas();
+                break;
+            case 1:
+                tiquetes();
+                break;
+            case 2:
+                atender();
+                break;
+            case 3:
+                administracion();
+                break;
+            case 4:
+                estadisticas();
+                break;
+            case 5:
+                return 0;
+            default:
+                cout << "La opcion no existe\n";
+                break;
+            }
+        }
+        catch (const runtime_error& e) {
+            cout << "Error: " << e.what() << endl;
+        }
     }
-}
-catch (const runtime_error& e) {
-    cout << "Error: " << e.what() << endl;
-}
-}
 }
