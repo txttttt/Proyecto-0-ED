@@ -42,20 +42,18 @@ using std::to_string;
 class AdmSystem
 {
 private:
-	List<KVPair<string, int>>* types;
-	List<Ticket>* tickets;
-	List<Service>* services;
-	List<Area>* areas; // Lista de áreas en el sistema
-	int ticketCounter;
-
+	List<KVPair<string, int>>* types;	// Lista de tipos de usuario
+	List<Ticket>* tickets;				// Lista de tiquetes
+	List<Service>* services;			// Lista de servicios
+	List<Area>* areas;					// Lista de áreas en el sistemaeas en el sistema
+	int ticketCounter;					// Cuenta de tiquetes
 
 public:
 	AdmSystem() {
-		tickets = new ArrayList<Ticket>();
-		services = new ArrayList<Service>();
-		types = new ArrayList<KVPair<string, int>>();
-		areas = new ArrayList<Area>(); // Lista de áreas en el sistema
-
+		tickets = new ArrayList<Ticket>();				// Lista de tiquetes
+		services = new ArrayList<Service>();			// Lista de servicios
+		types = new ArrayList<KVPair<string, int>>();	// Lista de tipos de usuarios
+		areas = new ArrayList<Area>();					// Lista de áreas en el sistema
 		ticketCounter = 100;
 	}
 
@@ -65,11 +63,22 @@ public:
 		delete types;
 		delete areas;
 	}
+
+	/*
+	* Agrega una nueva área al sistema
+	* @param description Hilera con la descripción del área
+	* @param code Hilera con el código del área
+	* @param numCounter Entero que indica la cantidad de ventanillas
+	*/
 	void addArea(string description, string code, int numCounter) {
 		Area* newArea = new Area(description, code, numCounter);
 		areas->append(*newArea);
 	}
 
+	/*
+	* Elimina un área dentro del sistema
+	* @param desc Hilera con la descripción del área a eliminar
+	*/
 	void deleteArea(string desc) {
 		for (int i = 0; i < areas->getSize(); i++) {
 			areas->goToPos(i);
@@ -78,16 +87,27 @@ public:
 		}
 	}
 
+	/*
+	* Muestra todas las áreas añadidas
+	*/
 	void printAreas() {
 		if (areas->getSize() == 0) {
 			cout << "No hay areas registradas." << endl;
 		}
 		else {
 			cout << "Lista de Areas:" << endl;
-			areas->print();
+			for (int i = 0; i < areas->getSize(); i++) {
+				areas->goToPos(i);
+				Area areaSelected = areas->getElement();
+				cout << areaSelected.getDescription() << ", " << areaSelected.getCode() << ", " << areaSelected.getNumCounter() << '\n';
+			}
 		}
 	}
 
+	/*
+	* Muestra las ventanillas presentes en un área
+	* @param areaCode Hilera del código del área a seleccionar
+	*/
 	void printCountersByArea(string areaCode) {
 		for (int i = 0; i < areas->getSize(); i++) {
 			areas->goToPos(i);
@@ -126,6 +146,7 @@ public:
 	* Despliega un mensaje si no encuentra el tipo a eliminar
 	*/
 	void deleteType(string description) {
+		setlocale(LC_ALL, "");
 		for (int i = 0; i < types->getSize(); i++) {
 			types->goToPos(i);
 			KVPair<string, int> pair = types->getElement();
@@ -149,7 +170,8 @@ public:
 		cout << "Tipo de usuario no encontrado." << endl;
 	}
 
-	/*Método para imprimir la lista de types
+	/*
+	* Método para imprimir la lista de types
 	* llama al metodo print de arraylist
 	*/
 	void printTypes() {
@@ -158,7 +180,11 @@ public:
 		}
 		else {
 			cout << "Lista de Tipos:" << endl;
-			types->print();
+			for (int i = 0; i < types->getSize(); i++) {
+				types->goToPos(i);
+				KVPair<string, int> typeSelected = types->getElement();
+				cout << typeSelected.key << '\n';
+			}
 		}
 	}
 
@@ -311,18 +337,26 @@ public:
 	}
 
 
-	// Método para imprimir la lista de servicios
+	// Muestra la lista de servicios
 	// Llama al método print de ArrayList
 	void printServices() {
 		if (services->getSize() == 0) {
-			cout << "No hay servicios registrados." << endl;
+			cout << "No hay servicios registrados.\n";
 		}
 		else {
-			cout << "Lista de Servicios:" << endl;
-			services->print();
+			cout << "Lista de Servicios:\n";
+			for (int i = 0; i < services->getSize(); i++) {
+				services->goToPos(i);
+				Service serviceSelected = services->getElement();
+				cout << serviceSelected.getDescription() << '\n';
+			}
 		}
 	}
 
+	/*
+	* Atiende el tiquete de mayor prioridad de un área 
+	* @param code Hilera con el código del área a atender el tiquete
+	*/
 	void attendTicket(string code) {
 		for (int i = 0; i < areas->getSize(); i++) {
 			if (areas->getElement().getCode() == code)
@@ -330,11 +364,17 @@ public:
 		}
 	}
 
+	/*
+	* Muestra estadísticas de los tiquetes generados, según por área, servicio y tipo de usuario
+	*/
 	void printStatistics() {
 		cout << "Cantidad de tiquetes por servicio: \n";
 
 	}
 
+	/*
+	* Limpia todos los tiquetes que se encuentren en cada área presente en el sistema
+	*/
 	void clearAreas() {
 		areas->goToStart();
 		for (int i = 0; i < areas->getSize(); i++) {

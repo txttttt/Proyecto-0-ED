@@ -16,8 +16,11 @@ using std::cout;
 using std::endl;
 using std::runtime_error;
 using std::ostream;
+
 // Se hace uso de la libreria time, en AdmSystem se provee mas informacion
 using std::time;
+using std::asctime;
+using std::localtime;
 using std::time_t;
 
 class Ticket {
@@ -28,14 +31,18 @@ private:
 	int finalPriority;
 
 public:
-	Ticket() {}
+	Ticket() {
+		creation = time(nullptr);
+		code = "";
+		finalPriority = 0;
+	}
+
 	Ticket(string code, int finalPriority) {
-		time_t now;
-		time(&now);
 		this->code = code;
-		this->creation = now;
+		this->creation = time(nullptr);
 		this->finalPriority = finalPriority;
 	}
+
 	Ticket(const Ticket& other) { // constructor para listas o colas
 		code = other.code;
 		creation = other.creation;
@@ -58,6 +65,10 @@ public:
 		return creation;
 	}
 
+	time_t getCreationFormatted() {
+		return creation;
+	}
+
 	void setFinalPriority(int fp) {
 		this->finalPriority = fp;
 	}
@@ -76,5 +87,5 @@ public:
 };
 
 ostream& operator<<(ostream& os, Ticket& ticket) {
-	return os << "(" << ticket.getCode() << ", " << ticket.getCreation() << ", " << ticket.getFinalPriority() << ")";
+	return os << "(" << ticket.getCode() << ", " << ticket.getCreationFormatted() << ", " << ticket.getFinalPriority() << ")";
 }

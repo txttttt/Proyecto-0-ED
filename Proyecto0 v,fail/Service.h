@@ -16,14 +16,18 @@ private:
 	int priority;
 
 public:
-
-	Service() {}
+	Service() {
+		description = "";
+		area = "";
+		priority = 0;
+	}
 
 	Service(string description, string area, int priority) {
 		this->description = description;
 		this->area = area;
 		this->priority = priority;
 	}
+
 	Service(const Service& other) {
 		description = other.description;
 		area = other.area;
@@ -49,7 +53,6 @@ public:
 			cout << "Error: La prioridad no puede ser negativa." << endl;
 		}
 	}
-
 
 	string getDescription() {
 		return description;

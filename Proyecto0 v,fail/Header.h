@@ -13,6 +13,7 @@ using std::string;
 void getInt(const string text, int& input_int);
 void getStr(const string text, string& input_str);
 
+// Hileras constantes para el menú
 string const main_menu =
 "\nMenú principal\n"
 "---------------------------------\n"

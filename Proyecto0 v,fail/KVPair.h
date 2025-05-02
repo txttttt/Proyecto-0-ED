@@ -10,7 +10,8 @@ public:
 	K key;
 	V value;
 
-	KVPair() {}
+	KVPair() {
+	}
 
 	KVPair(K key) {
 		this->key = key;

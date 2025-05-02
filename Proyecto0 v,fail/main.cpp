@@ -21,8 +21,8 @@ using std::string;
 using std::endl;
 using std::runtime_error;
 
-int opcion;
 // para funciones que reciben varios parametros
+int opcion;
 string input;
 string input2;
 string input3;
@@ -31,141 +31,157 @@ AdmSystem* control = new AdmSystem();
 
 // ESTADO COLAS
 //-------------------------------------------------------------------------------------------------
-void estadoColas() {
+void static estadoColas() {
     control->printAreas();
 }
+
 // TIQUETES
 //-------------------------------------------------------------------------------------------------
-void tiquetes() {
-    getStr("Inserte el area: ", input);
+void static tiquetes() {
+    getStr("Inserte el área: ", input);
     getStr("Inserte el tipo de usuario: ", input2);
     getStr("Inserte la decripcion del servicio: ", input3);
     control->addTicket(input, input2, input3);
 }
+
 // ATENDER
 //-------------------------------------------------------------------------------------------------
-void atender() {
+void static atender() {
     getStr("Inserte el codigo de area: ", input);
     control->attendTicket(input);
 }
+
 // ADMINISTRACION
 //-------------------------------------------------------------------------------------------------
-void tiposUsuario() {
-    control->printTypes();
-    cout << users_options;
-    getInt("", opcion);
-    switch (opcion)
-    {
-    case 0:
-        getStr("Inserte la descripcion: ", input);
-        getInt("Inserte la prioridad: ", opcion);
-        control->addType(input, opcion);
-        break;
-    case 1:
-        getStr("Inserte de descripcion: ", input);
-        control->deleteType(input);
-        break;
-    case 2:
-        break;
-    default:
-        cout << "La opcion no existe\n";
-        break;
+void static tiposUsuario() {
+    while (true) {
+        control->printTypes();
+        getInt(users_options, opcion);
+        switch (opcion) {
+        case 0:
+            getStr("Inserte la descripcion: ", input);
+            getInt("Inserte la prioridad: ", opcion);
+            control->addType(input, opcion);
+            break;
+        case 1:
+            getStr("Inserte de descripcion: ", input);
+            control->deleteType(input);
+            break;
+        case 2:
+            return;
+        default:
+            cout << "La opcion no existe\n";
+            break;
+        }
     }
 }
 
-void areas() {
-    control->printAreas();
-    cout << users_options;
-    getInt("", opcion);
-    switch (opcion)
-    {
-    case 0:
-        getStr("Inserte la descripcion: ", input);
-        getStr("Inserte el codigo: ", input);
-        getInt("Inserte la prioridad: ", opcion);
-        control->addArea(input, input2, opcion);
-        break;
-    case 1:
-        getStr("Inserte la descripcion: ", input);
-        control->deleteArea(input);
-        break;
-    case 2:
-        break;
-    default:
-        cout << "La opcion no existe\n";
-        break;
+void static areas() {
+    while (true) {
+        control->printAreas();
+        getInt(areas_options, opcion);
+        switch (opcion) {
+        case 0:
+            getStr("Inserte la descripcion: ", input);
+            getStr("Inserte el codigo: ", input);
+            getInt("Inserte la prioridad: ", opcion);
+            control->addArea(input, input2, opcion);
+            break;
+        case 1:
+            getStr("Inserte la descripcion: ", input);
+            control->deleteArea(input);
+            break;
+        case 2:
+            break;
+        default:
+            cout << "La opcion no existe\n";
+            break;
+        }
     }
 }
 
-void servicios() {
-    control->printServices();
-    cout << "Para crear un nuevo servicio hay que tener al menos un area creada";
-    cout << users_options;
-    getInt("", opcion);
-    switch (opcion)
-    {
-    case 0:
-        getStr("Inserte de descripcion: ", input);
-        getStr("Inserte el area: ", input2);
-        getInt("Inserte la prioridad: ", opcion);
-        control->addService(input, input2, opcion);
-        break;
-    case 1:
-        getStr("Inserte de descripcion: ", input);
-        control->deleteService(input);
-        break;
-    case 2:
-        break;
-    default:
-        cout << "La opcion no existe\n";
-        break;
+void static servicios() {
+    while (true) {
+        control->printServices();
+        cout << "Para crear un nuevo servicio hay que tener al menos un area creada";
+        getInt(services_options, opcion);
+        switch (opcion) {
+        case 0:
+            getStr("Inserte de descripcion: ", input);
+            getStr("Inserte el area: ", input2);
+            getInt("Inserte la prioridad: ", opcion);
+            control->addService(input, input2, opcion);
+            break;
+        case 1:
+            getStr("Inserte de descripcion: ", input);
+            control->deleteService(input);
+            break;
+        case 2:
+            return;
+        default:
+            cout << "La opcion no existe\n";
+            break;
+        }
     }
 }
 
-void vaciarColas() {
+void static vaciarColas() {
     control->clearAreas();
 }
 
-void administracion() {
-    cout << admin_menu;
-    getInt("", opcion);
-    switch (opcion)
-    {
-    case 0:
-        tiposUsuario();
-        break;
-    case 1:
-        areas();
-        break;
-    case 2:
-        servicios();
-        break;
-    case 3:
-        vaciarColas();
-        break;
-    case 4:
-        break;
-    default:
-        cout << "La opcion no existe\n";
-        break;
+void static administracion() {
+    while (true) {
+        getInt(admin_menu, opcion);
+        switch (opcion) {
+        case 0:
+            tiposUsuario();
+            break;
+        case 1:
+            areas();
+            break;
+        case 2:
+            servicios();
+            break;
+        case 3:
+            vaciarColas();
+            break;
+        case 4:
+            return;
+        default:
+            cout << "La opcion no existe\n";
+            break;
+        }
     }
 }
 
 // ESTADISTICAS
 //-------------------------------------------------------------------------------------------------
-void estadisticas() {
+void static estadisticas() {
 
 }
 
 // MAIN
 //-------------------------------------------------------------------------------------------------
 int main() {
+    setlocale(LC_ALL, "");
+
+    // Setup inicial
+    control->addType("Regular", 2);
+    control->addType("Adulto mayor", 0);
+    control->printTypes();
+
+    control->addService("Depósito", "CJ", 2);
+    control->addService("Retiro", "CJ", 0);
+    control->printServices();
+
+    control->addArea("Cajas", "CJ", 4);
+    control->addArea("Consultas", "CO", 5);
+    control->printAreas();
+
     while (true) {
         try {
-            cout << main_menu;
-            getInt("", opcion);
-            switch (opcion)
-            {
+            getInt(main_menu, opcion);
+            switch (opcion) {
             case 0:
                 estadoColas();
                 break;
