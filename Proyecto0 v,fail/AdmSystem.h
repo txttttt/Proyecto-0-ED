@@ -70,13 +70,13 @@ public:
 		areas->append(*newArea);
 	}
 
-    void deleteArea(string desc) {
-        for (int i = 0; i < areas->getSize(); i++) {
-            areas->goToPos(i);
-            if (areas->getElement().getDescription() == desc)
-                areas->remove();
-        }
-    }
+	void deleteArea(string desc) {
+		for (int i = 0; i < areas->getSize(); i++) {
+			areas->goToPos(i);
+			if (areas->getElement().getDescription() == desc)
+				areas->remove();
+		}
+	}
 
 	void printAreas() {
 		if (areas->getSize() == 0) {
@@ -324,7 +324,7 @@ public:
 	}
 
 	void attendTicket(string code) {
-		for (int i = 0; i < areas->getSize(); i++){
+		for (int i = 0; i < areas->getSize(); i++) {
 			if (areas->getElement().getCode() == code)
 				areas->getElement().attendNextTicket();
 		}
@@ -333,6 +333,14 @@ public:
 	void printStatistics() {
 		cout << "Cantidad de tiquetes por servicio: \n";
 
+	}
+
+	void clearAreas() {
+		areas->goToStart();
+		for (int i = 0; i < areas->getSize(); i++) {
+			areas->getElement().deleteTickets();
+			areas->goToPos(i);
+		}
 	}
 
 	//Solicitud de un tiquete

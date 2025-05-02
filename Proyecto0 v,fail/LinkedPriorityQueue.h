@@ -85,8 +85,11 @@ public:
 
 	void print() {
 		for (int i = 0; i < priorities; i++) {
-			cout << i << ": ";
-			queues[i].print();
+			if (!queues[i].isEmpty()) {
+				cout << i << ": ";
+				queues[i].print();
+			}
 		}
 	}
 };
+

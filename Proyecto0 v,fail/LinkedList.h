@@ -23,13 +23,6 @@ public:
 		size = 0;
 	}
 
-	LinkedList(const LinkedList<E>& other) { // Constructor de copia
-		for (int i = 0; i < other.getSize(); i++) {
-			other.goToPos(i);
-			this->append(other.getElement());
-		}
-	}
-
 	~LinkedList() {
 		clear();
 		delete head;
@@ -144,7 +137,7 @@ public:
 		}
 		if (current == tail)
 			cout << "*";
-		cout << " ]" << endl;
+		cout << "]" << endl;
 	}
 
 	int indexOf(E element, int start) {
@@ -165,7 +158,7 @@ public:
 
 	bool contains(E element) {
 		if (size == 0)
-			return false;//throw runtime_error("List is empty.");
+			throw runtime_error("List is empty.");
 		Node<E>* temp = head->next;
 		for (int i = 0; i < size; i++) {
 			if (temp->element == element)

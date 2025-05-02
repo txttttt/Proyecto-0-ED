@@ -21,9 +21,6 @@
     <ClInclude Include="ArrayQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CircleList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Def.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -31,9 +28,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HeapPriorityQueue.h">
@@ -87,12 +81,12 @@
     <ClInclude Include="Counter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="userInput.cpp">

@@ -99,4 +99,3 @@ public:
 ostream& operator<<(ostream& os, Service& service) {
 	return os << "(" << service.getDescription() << ", " << service.getArea() << ", " << service.getPriority() << ")";
 }
-

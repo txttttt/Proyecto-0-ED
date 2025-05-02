@@ -1,30 +1,6 @@
 /* Archivo creado por: Javier Lee Liang
 * Fecha creada: 27/04/2025
-* El archivo contiene el nombre de los m√©todos que se van usar para 
-* compartir dentro del proyecto
-
-#pragma once
-
-#include <string>
-
-using std::string;
-
-// M√©todos de "menu.cpp"
-void runningLoop(void (*f)(bool&, int&));
-void getMainMenuAction(bool& running, int& input);
-void getTicketMenuAction(bool& running, int& input);
-void getAdminMenuAction(bool& running, int& input);
-void getServicesOptionsAction(bool& running, int& input);
-void getAreasOptionsAction(bool& running, int& input);
-void getUsersOptionsAction(bool& running, int& input);
-
-// M√©todos de "userInput.cpp"
-void getInt(const string text, int& input_int);
-void getStr(const string text, string& input_str);
-*/
-/* Archivo creado por: Javier Lee Liang
-* Fecha creada: 27/04/2025
-* El archivo contiene el nombre de los m√©todos que se van usar para 
+* El archivo contiene el nombre de los mÈtodos que se van usar para 
 * compartir dentro del proyecto
 */
 #pragma once
@@ -33,29 +9,29 @@ void getStr(const string text, string& input_str);
 
 using std::string;
 
-// M√©todos de "userInput.cpp"
+// MÈtodos de "userInput.cpp"
 void getInt(const string text, int& input_int);
 void getStr(const string text, string& input_str);
 
 string const main_menu =
-"\nMen√∫ principal\n"
+"\nMen˙ principal\n"
 "---------------------------------\n"
 "0. Estado de las colas\n"
 "1. Agregar tiquetes\n"
 "2. Atender\n"
-"3. Administraci√≥n\n"
-"4. Estad√≠sticas del sistema\n"
+"3. AdministraciÛn\n"
+"4. EstadÌsticas del sistema\n"
 "5. Salir\n"
 "---------------------------------\n"
 "Seleccione alguna de las acciones: ";
 
 string const admin_menu =
-"\nMen√∫ de administraci√≥n\n"
+"\nMen˙ de administraciÛn\n"
 "---------------------------------\n"
 "0. Tipos de usuario\n"
-"1. √Åreas\n"
+"1. ¡reas\n"
 "2. Servicios disponibles\n"
-"3. Limpiar colas y estad√≠sticas\n"
+"3. Limpiar colas y estadÌsticas\n"
 "4. Regresar\n"
 "---------------------------------\n"
 "Seleccione alguna de las opciones a modificar: ";
@@ -70,7 +46,7 @@ string const users_options =
 "Seleccione alguna de las opciones: ";
 
 string const areas_options =
-"\nOpciones de √°reas\n"
+"\nOpciones de ·reas\n"
 "---------------------------------\n"
 "0. Agregar\n"
 "1. Modificar cantdad de ventanillas\n"
@@ -88,4 +64,3 @@ string const services_options =
 "3. Regresar\n"
 "---------------------------------\n"
 "Seleccione alguna de las opciones: ";
-
