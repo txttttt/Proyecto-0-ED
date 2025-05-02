@@ -196,6 +196,14 @@ public:
 	* Despliega un mensaje si el tiquete ya existe
 	*/
 	void addTicket(string areaCode, string userType, string serviceDescription) {
+		// Buscar si el código de área ingresado existe
+		Area dummieArea;
+		dummieArea.setCode(areaCode);
+		if (!areas->contains(dummieArea)) {
+			cout << "Área no encontrada.\n";
+			return;
+		}
+
 		// Buscar prioridad del tipo de usuario
 		int userPriority = -1;
 		for (int i = 0; i < types->getSize(); i++) {
@@ -368,7 +376,28 @@ public:
 	* Muestra estadísticas de los tiquetes generados, según por área, servicio y tipo de usuario
 	*/
 	void printStatistics() {
-		cout << "Cantidad de tiquetes por servicio: \n";
+		cout << "Tiempo promedio de cada área: \n";
+		for (int i = 0; i < areas->getSize(); i++) {
+			areas->goToPos(i);
+			Area selected = areas->getElement();
+			cout << selected.getDescription() << selected.averageWaitTime() << '\n';
+		}
+		cout << '\n';
+
+		cout << "Cantidad de tiquetes dispensados por área: \n";
+		for (int i = 0; i < areas->getSize(); i++) {
+			areas->goToPos(i);
+			Area selected = areas->getElement();
+			cout << selected.getDescription() << selected.getNumCounter() << '\n';
+		}
+		cout << '\n';
+
+		cout << "Cantidad de tiquetes por atendidos por ventanilla: \n";
+
+		cout << "Cantidad de tiquetes solicitados por servicio: \n";
+
+		cout << "Cantidad de tiquetes emitidos por cada tipo de usuario: \n";
+	}
 
 	}
 
