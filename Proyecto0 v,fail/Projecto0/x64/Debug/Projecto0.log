@@ -1,9 +1,5 @@
 ﻿  main.cpp
-D:\Disco D\DOCUMENTOS\TEC\Estructuras de datos\coso-ed-main\Proyecto0 v,fail\Area.h(87,29): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+D:\Disco D\DOCUMENTOS\TEC\Estructuras de datos\coso-ed-main\Proyecto0 v,fail\Area.h(150,33): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
   (compilando archivo de origen "main.cpp")
   
-  userInput.cpp
-D:\Disco D\DOCUMENTOS\TEC\Estructuras de datos\coso-ed-main\Proyecto0 v,fail\userInput.cpp(35,33): warning C4101: 'ia': variable local sin referencia
-D:\Disco D\DOCUMENTOS\TEC\Estructuras de datos\coso-ed-main\Proyecto0 v,fail\userInput.cpp(38,29): warning C4101: 'oof': variable local sin referencia
-  Generando código...
   Projecto0.vcxproj -> D:\Disco D\DOCUMENTOS\TEC\Estructuras de datos\coso-ed-main\Proyecto0 v,fail\x64\Debug\Projecto0.exe

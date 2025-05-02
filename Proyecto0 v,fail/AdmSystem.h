@@ -26,6 +26,7 @@ Crear timestamp con tiempo actual: https://www.w3schools.com/cpp/cpp_date.asp
 #include "ArrayList.h"
 #include "KVPair.h"
 
+#include "Area.h"
 #include "Ticket.h"
 #include "Service.h"
 
@@ -44,13 +45,17 @@ private:
 	List<KVPair<string, int>>* types;
 	List<Ticket>* tickets;
 	List<Service>* services;
+	List<Area>* areas; // Lista de áreas en el sistema
 	int ticketCounter;
+
 
 public:
 	AdmSystem() {
 		tickets = new ArrayList<Ticket>();
 		services = new ArrayList<Service>();
 		types = new ArrayList<KVPair<string, int>>();
+		areas = new ArrayList<Area>(); // Lista de áreas en el sistema
+
 		ticketCounter = 100;
 	}
 
@@ -58,7 +63,37 @@ public:
 		delete services;
 		delete tickets;
 		delete types;
+		delete areas;
 	}
+	void addArea(string description, string code, int numCounter) {
+		Area* newArea = new Area(description, code, numCounter);
+		areas->append(*newArea);
+	}
+
+
+
+
+	void printAreas() {
+		if (areas->getSize() == 0) {
+			cout << "No hay areas registradas." << endl;
+		}
+		else {
+			cout << "Lista de Areas:" << endl;
+			areas->print();
+		}
+	}
+
+	void printCountersByArea(string areaCode) {
+		for (int i = 0; i < areas->getSize(); i++) {
+			areas->goToPos(i);
+			if (areas->getElement().getCode() == areaCode) {
+				areas->getElement().printCounters();
+				return;
+			}
+		}
+		cout << "Area no encontrada." << endl;
+	}
+
 
 	/*
 	* Agrega un nuevo tipo de cliente al sistema
@@ -93,7 +128,7 @@ public:
 			if (desc == description) {
 				char confirm;
 				do {
-					cout << "¿Está seguro de que desea eliminar el tipo de usuario " << description << "? (s/n): ";
+					cout << "¿Esta seguro de que desea eliminar el tipo de usuario " << description << "? (s/n): ";
 					cin >> confirm;
 				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
 				if (confirm == 's' || confirm == 'S') {
@@ -101,7 +136,7 @@ public:
 					cout << "Tipo de usuario eliminado." << endl;
 				}
 				else {
-					cout << "Eliminación cancelada." << endl;
+					cout << "Eliminacion cancelada." << endl;
 				}
 				return;
 			}
@@ -195,7 +230,7 @@ public:
 			if (tickets->getElement().getCode() == code) {
 				char confirm;
 				do {
-					cout << "¿Está seguro de que desea eliminar el tiquete " << code << "? (s/n): ";
+					cout << "¿Esta seguro de que desea eliminar el tiquete " << code << "? (s/n): ";
 					cin >> confirm;
 				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
 
@@ -204,7 +239,7 @@ public:
 					cout << "Tiquete eliminado." << endl;
 				}
 				else {
-					cout << "Eliminación cancelada." << endl;
+					cout << "Eliminacion cancelada." << endl;
 				}
 				return;
 			}

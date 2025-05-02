@@ -61,7 +61,7 @@ int main() {
     AdmSystem* AdmControl = new AdmSystem();
 
     // Creación de un área con ventanillas
-    Area* serviceArea = new Area("Servicio al Cliente", "S", 3);
+    //Area* serviceArea = new Area("Servicio al Cliente", "S", 3);
 
 
     // Agregamos servicios y tipos de cliente
@@ -78,15 +78,15 @@ int main() {
     Ticket ticket1("S101", 5);
     Ticket ticket2("S102", 7);
 
-    serviceArea->addTicket(ticket1);
-    serviceArea->addTicket(ticket2);
+    //serviceArea->addTicket(ticket1);
+    //serviceArea->addTicket(ticket2);
 
     cout << "Tiquetes agregados a la cola de prioridad del area." << endl;
-    serviceArea->printTickets();
+    //serviceArea->printTickets();
 
     // Distribución de tiquetes a ventanillas disponibles
-    serviceArea->distributeTicket();
-    serviceArea->distributeTicket();
+    //serviceArea->distributeTicket();
+    //serviceArea->distributeTicket();
 
     // Imprimimos estado del área y ventanillas
     //serviceArea->print();
@@ -101,7 +101,7 @@ int main() {
 
     // Limpiamos memoria
     delete AdmControl;
-    delete serviceArea;
+    //delete serviceArea;    TODO LO QUE TIENE QUE VER CON SERVIEAREA ESTA OBSOLETO
 
     return 0;
 };
@@ -141,6 +141,35 @@ int main() {
         delete admControl;
 
         return 0;
+    }
+    catch (const runtime_error& e) {
+        cout << e.what() << endl;
+    }
+};
+
+MAIN DE PRUEBA Y DEMOSTRACION DEL USO DE ADMSYSTEM CON LA PARTE DE AREAS Y VENTANILLAS
+int main() {
+    try {
+            // Inicializacion del sistema de administracion
+            AdmSystem* admControl = new AdmSystem();
+
+            // Agregar areas con sus respectivas ventanillas
+            admControl->addArea("Atencion General", "AG", 3);
+            admControl->addArea("Reclamos", "RC", 2);
+            admControl->addArea("Caja", "CX", 4);
+
+            // Imprimir lista de areas
+            cout << "Lista de areas registradas:" << endl;
+            admControl->printAreas();
+
+            // Consultar las ventanillas de un area especifica
+            cout << "\nVentanillas en el area de Atencion General:" << endl;
+            admControl->printCountersByArea("AG");
+
+            // Limpiar memoria antes de salir
+            delete admControl;
+
+            return 0;
     }
     catch (const runtime_error& e) {
         cout << e.what() << endl;

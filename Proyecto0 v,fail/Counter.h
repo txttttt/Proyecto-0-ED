@@ -73,3 +73,4 @@ ostream& operator<<(ostream& os, const Counter& counter) {
         << ", Tiquetes atendidos: " << counter.ticketsServed << "]";
 }
 
+

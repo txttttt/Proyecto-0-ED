@@ -19,7 +19,7 @@ private:
 public:
 	LinkedQueue() {
 		front = new Node<E>(nullptr);
-		back = front; 
+		back = front;
 		size = 0;
 	}
 
@@ -41,22 +41,22 @@ public:
 		Node<E>* temp = front->next;
 		front->next = temp->next;
 		delete temp;
-		if (size == 1){
+		if (size == 1) {
 			back = front;
 		}
 		size--;
 		return result;
 	}
 
-	E frontValue(){
-		if (size == 0){
+	E frontValue() {
+		if (size == 0) {
 			throw runtime_error("Queue is empty.");
 		}
 		return front->next->element;
 	}
 
-	void clear(){
-		while (front->next != nullptr){
+	void clear() {
+		while (front->next != nullptr) {
 			back = front->next;
 			front->next = back->next;
 			delete back;
@@ -65,21 +65,22 @@ public:
 		size = 0;
 	}
 
-	int getSize(){
+	int getSize() {
 		return size;
 	}
 
-	bool isEmpty(){
+	bool isEmpty() {
 		return size == 0;
 	}
 
-	void print(){
+	void print() {
 		Node<E>* temp = front->next;
 		cout << "[";
-		while (temp != nullptr){
+		while (temp != nullptr) {
 			cout << temp->element << " ";
 			temp = temp->next;
 		}
 		cout << "]" << endl;
 	}
 };
+
