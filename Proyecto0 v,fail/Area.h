@@ -37,7 +37,7 @@ using std::cout;
 using std::endl;
 using std::runtime_error;
 using std::to_string;
-// Se usa `time_t` para el manejo de tiempos en estadísticas
+// Se usa `time_t` para el manejo de tiempos en estadÃ­sticas
 using std::time;
 using std::time_t;
 
@@ -48,8 +48,8 @@ private:
     int numCounter;
     int totalWaitTime;
     int attendedTickets;
-    LinkedPriorityQueue<Ticket>* tickets; // Cola de prioridad para tiquetes en el área
-    LinkedList<Counter>* counters; // Lista de ventanillas en el área
+    LinkedPriorityQueue<Ticket>* tickets; // Cola de prioridad para tiquetes en el Ã¡rea
+    LinkedList<Counter>* counters; // Lista de ventanillas en el Ã¡rea
 
 public:
     Area() {
@@ -92,9 +92,9 @@ public:
         delete counters;
     }
 
-    Area& operator=(const Area& other) { // Operador de asignación
+    Area& operator=(const Area& other) { // Operador de asignaciÃ³n
         if (this == &other)
-            return *this; // Evita auto-asignación
+            return *this; // Evita auto-asignaciÃ³n
 
         // Liberar memoria existente antes de copiar
         delete tickets;
@@ -107,7 +107,7 @@ public:
         totalWaitTime = other.totalWaitTime;
         attendedTickets = other.attendedTickets;
 
-        // Copiar estructuras dinámicas
+        // Copiar estructuras dinÃ¡micas
         tickets = new LinkedPriorityQueue<Ticket>(110);
         counters = new LinkedList<Counter>();
 
@@ -119,7 +119,7 @@ public:
         return *this;
     }
 
-    // Métodos de acceso
+    // MÃ©todos de acceso
     string getDescription() const { return description; }
     string getCode() const { return code; }
     int getNumCounter() const { return numCounter; }
@@ -174,6 +174,10 @@ public:
 
     float averageWaitTime() const {
         return attendedTickets != 0 ? float(totalWaitTime) / float(attendedTickets) : 0;
+    }
+
+    void deleteTickets() {
+        tickets->clear();
     }
 
     LinkedList<Counter>& getCounters() { return *counters; }
