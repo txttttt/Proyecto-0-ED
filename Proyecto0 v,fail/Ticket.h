@@ -26,6 +26,7 @@ private:
 	time_t creation;
 	string code;
 	int finalPriority;
+
 public:
 	Ticket() {}
 	Ticket(string code, int finalPriority) {

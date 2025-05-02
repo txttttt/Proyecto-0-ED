@@ -9,6 +9,7 @@ Esto se hace porque de otro modo parecia no funcionar
 Friend: https://learn.microsoft.com/en-us/cpp/cpp/friend-cpp?view=msvc-170
 Informacion adicional: https://www.geeksforgeeks.org/friend-class-function-cpp/
 */
+
 /*
 * Los Constructores copia son necesario para el correcto funcionamiento de este codigo
 * Estos se encargan de actuar como un constructor cuando se devuelve un obj de la clase por valor, cuando se pasa un obj como argumento,

@@ -20,6 +20,7 @@ using std::cin;
 using std::string;
 using std::endl;
 using std::runtime_error;
+
 int opcion;
 // para funciones que reciben varios parametros
 string input;
@@ -30,7 +31,7 @@ AdmSystem* control = new AdmSystem();
 // ESTADO COLAS
 //-------------------------------------------------------------------------------------------------
 void estadoColas() {
-    // poner prints directamente
+    control->printAreas();
 }
 // TIQUETES
 //-------------------------------------------------------------------------------------------------
@@ -42,7 +43,7 @@ void tiquetes() {
 //-------------------------------------------------------------------------------------------------
 void atender() {
     getStr("Inserte el codigo de area: ", input);
-    getInt("Inserte el numero de ventanilla", opcion);
+    control->attendTicket(input);
 
 }
 // ADMINISTRACION
@@ -160,12 +161,10 @@ void administracion() {
     }
 }
 
-
-
 // ESTADISTICAS
 //-------------------------------------------------------------------------------------------------
 void estadisticas() {
-    // poner prints directamente
+    
 }
 
 // MAIN

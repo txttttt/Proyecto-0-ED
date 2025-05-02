@@ -70,8 +70,13 @@ public:
 		areas->append(*newArea);
 	}
 
-
-
+    void deleteArea(string desc) {
+        for (int i = 0; i < areas->getSize(); i++) {
+            areas->goToPos(i);
+            if (areas->getElement().getDescription() == desc)
+                areas->remove();
+        }
+    }
 
 	void printAreas() {
 		if (areas->getSize() == 0) {
@@ -216,8 +221,6 @@ public:
 		}
 	}
 
-
-
 	/*
 	* Elimina un tiquete en el sistema
 	* @param code Hilera que representa código del tiquete a eliminar
@@ -318,6 +321,18 @@ public:
 			cout << "Lista de Servicios:" << endl;
 			services->print();
 		}
+	}
+
+	void attendTicket(string code) {
+		for (int i = 0; i < areas->getSize(); i++){
+			if (areas->getElement().getCode() == code)
+				areas->getElement().attendNextTicket();
+		}
+	}
+
+	void printStatistics() {
+		cout << "Cantidad de tiquetes por servicio: \n";
+
 	}
 
 	//Solicitud de un tiquete
