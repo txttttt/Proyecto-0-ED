@@ -1,178 +1,206 @@
 /* Archivo creado por Javier Lee Liang
 * Este es el archivo principal en donde se va a correr el proyecto
 */
+#include <iostream>
 #include <string>
-#include "OrderedArrayList.h"
+#include <stdexcept>
 #include "DLinkedList.h"
 #include "KVPair.h"
+
+#include "OrderedArrayList.h"
 #include "Service.h"
-#include "Header.h"
 #include "AdmSystem.h"
-
-using std::string;
-
-/* Creado por Kevin Jimenez y Fabian Solis
-* Función principal para correr el proyecto
-*
-int main() {
-	// Permite que el sistema pueda soportar texto con tildes y la ñ
-	setlocale(LC_ALL, "");
-	
-	// Inicializacion de AdmSystem
-	AdmSystem* AdmControl = new AdmSystem();
-
-	// Agregar una serie de servicios iniciales
-	AdmControl->addService("Desc1", "Area1", 5);
-	AdmControl->addService("Desc2", "Area2", 6);
-	AdmControl->addService("Desc3", "Area3", 9);
-	AdmControl->addService("Desc4", "Area4", 7);
-	AdmControl->addService("Desc5", "Area5", 2);
-	
-	// Agregar una serie de tipos de clientes
-	AdmControl->addType("Adulto Mayor", 1);
-	AdmControl->addType("Persona con nececidades especiales", 2);
-	AdmControl->addType("Usuario regular", 3);
-	AdmControl->addType("Representante organizacional", 0);
-
-	runningLoop(&getMainMenuAction);
-	return 0;
-}
-*/
-//Main de pruebas sin pasar por el menu, por si gustan copiarlo y poder usarlo en otro proyecto para probar cosas, Creado por Fabian Solis Izaguirre 
-
-#include <iostream>
-#include <stdexcept>
-//#include <string>
-// #include "AdmSystem.h"
 #include "Area.h"
 #include "Counter.h"
 #include "Ticket.h"
+#include "Header.h"
 
 using std::cout;
 using std::cin;
 using std::string;
 using std::endl;
+using std::runtime_error;
+int opcion;
+// para funciones que reciben varios parametros
+string input;
+string input2;
+AdmSystem* control = new AdmSystem();
 
+
+// ESTADO COLAS
+//-------------------------------------------------------------------------------------------------
+void estadoColas() {
+    // poner prints directamente
+}
+// TIQUETES
+//-------------------------------------------------------------------------------------------------
+void tiquetes() {
+    cout << "Seleccione el tipo de usuario que es: ";
+
+}
+// ATENDER
+//-------------------------------------------------------------------------------------------------
+void atender() {
+    getStr("Inserte el codigo de area: ", input);
+    getInt("Inserte el numero de ventanilla", opcion);
+
+}
+// ADMINISTRACION
+//-------------------------------------------------------------------------------------------------
+void tiposUsuario() {
+    cout << users_options;
+    getInt("", opcion);
+    switch (opcion)
+    {
+    case 0:
+        getStr("Inserte la descripcion: ", input);
+        getInt("Inserte la prioridad: ", opcion);
+        control->addType(input, opcion);
+        break;
+    case 1:
+        getStr("Inserte de descripcion: ", input);
+        control->deleteType(input);
+        break;
+    case 2:
+        break;
+    default:
+        cout << "La opcion no existe\n";
+        break;
+    }
+}
+
+void areas() {
+    cout << users_options;
+    getInt("", opcion);
+    switch (opcion)
+    {
+    case 0:
+        getStr("Inserte la descripcion: ", input);
+        getStr("Inserte el codigo: ", input);
+        getInt("Inserte la prioridad: ", opcion);
+        control->addArea(input, input2 ,opcion);
+        break;
+    case 1:
+        getStr("Inserte la descripcion: ", input);
+        control->deleteArea(input);
+        break;
+    case 2:
+        break;
+    default:
+        cout << "La opcion no existe\n";
+        break;
+    }
+}
+
+void servicios() {
+    cout << users_options;
+    getInt("", opcion);
+    switch (opcion)
+    {
+    case 0:
+        getStr("Inserte de descripcion: ", input);
+        getStr("Inserte el area: ", input2);
+        getInt("Inserte la prioridad: ", opcion);
+        control->addService(input, input2, opcion);
+        break;
+    case 1:
+        getStr("Inserte de descripcion: ", input);
+        control->deleteService(input);
+        break;
+    case 2:
+        break;
+    default:
+        cout << "La opcion no existe\n";
+        break;
+    }
+}
+
+void vaciarColas() {
+    cout << users_options;
+    getInt("", opcion);
+    switch (opcion)
+    {
+    case 0:
+
+        break;
+    case 1:
+
+        break;
+    case 2:
+
+        break;
+    default:
+        cout << "La opcion no existe\n";
+        break;
+    }
+}
+
+void administracion() {
+    cout << admin_menu;
+    getInt("", opcion);
+    switch (opcion)
+    {
+    case 0:
+        tiposUsuario();
+        break;
+    case 1:
+        areas();
+        break;
+    case 2:
+        servicios();
+        break;
+    case 3:
+        vaciarColas();
+        break;
+    case 4:
+        break;
+    default:
+        cout << "La opcion no existe\n";
+        break;
+    }
+}
+
+
+
+// ESTADISTICAS
+//-------------------------------------------------------------------------------------------------
+void estadisticas() {
+    // poner prints directamente
+}
+
+// MAIN
+//-------------------------------------------------------------------------------------------------
 int main() {
-    // Permite que el sistema pueda soportar texto con tildes y la ñ
-    setlocale(LC_ALL, "");
-
-    // Inicialización del sistema de administración
-    AdmSystem* AdmControl = new AdmSystem();
-
-    // Creación de un área con ventanillas
-    //Area* serviceArea = new Area("Servicio al Cliente", "S", 3);
-
-
-    // Agregamos servicios y tipos de cliente
-    AdmControl->addService("Atencion General", "S", 5);
-    AdmControl->addService("Reclamos", "S", 7);
-    AdmControl->addType("Adulto Mayor", 1);
-    AdmControl->addType("Usuario Regular", 3);
-
-    // Imprimimos estado del sistema
-    AdmControl->printServices();
-    AdmControl->printTypes();
-
-    // Creación de tiquetes y asignación a área
-    Ticket ticket1("S101", 5);
-    Ticket ticket2("S102", 7);
-
-    //serviceArea->addTicket(ticket1);
-    //serviceArea->addTicket(ticket2);
-
-    cout << "Tiquetes agregados a la cola de prioridad del area." << endl;
-    //serviceArea->printTickets();
-
-    // Distribución de tiquetes a ventanillas disponibles
-    //serviceArea->distributeTicket();
-    //serviceArea->distributeTicket();
-
-    // Imprimimos estado del área y ventanillas
-    //serviceArea->print();
-
-    // Eliminamos un servicio y un tipo de usuario para probar las funciones de eliminación
-    AdmControl->deleteService("Atencion General");
-    AdmControl->deleteType("Usuario Regular");
-
-    // Mostramos el estado actualizado del sistema
-    AdmControl->printServices();
-    AdmControl->printTypes();
-
-    // Limpiamos memoria
-    delete AdmControl;
-    //delete serviceArea;    TODO LO QUE TIENE QUE VER CON SERVIEAREA ESTA OBSOLETO
-
-    return 0;
-};
-
-/*int main() {
-    try {
-        // Inicialización del sistema
-        AdmSystem* admControl = new AdmSystem();
-
-        // Agregar tipos de usuario
-        admControl->addType("Adulto Mayor", 1);
-        admControl->addType("Usuario Regular", 3);
-        admControl->printTypes();
-
-        // Agregar servicios
-        admControl->addService("Atencion General", "A", 5);
-        admControl->addService("Reclamos", "B", 7);
-        admControl->printServices();
-
-        // Generar tiquetes con código dinámico
-        admControl->addTicket("A", "Adulto Mayor", "Atencion General");
-        admControl->addTicket("B", "Usuario Regular", "Reclamos");
-        admControl->addTicket("A", "Usuario Regular", "Atencion General");
-        admControl->printTickets();
-        /*
-        // Intentar generar un tiquete con un tipo de usuario inexistente
-        admControl->addTicket("C", "Estudiante", "Atencion General");
-
-        // Intentar generar un tiquete con un servicio inexistente
-        admControl->addTicket("B", "Usuario Regular", "Tramites Especiales");
-
-        // Verificar que el contador de tiquetes sigue aumentando
-        admControl->addTicket("A", "Adulto Mayor", "Reclamos");
-        admControl->printTickets();
-        
-        // Limpiar memoria
-        delete admControl;
-
+while (true) {
+try {
+    cout << main_menu;
+    getInt("", opcion);
+    switch (opcion)
+    {
+    case 0:
+        estadoColas();
+        break;
+    case 1:
+        tiquetes();
+        break;
+    case 2:
+        atender();
+        break;
+    case 3:
+        administracion();
+        break;
+    case 4:
+        estadisticas();
+        break;
+    case 5:
         return 0;
+    default:
+        cout << "La opcion no existe\n";
+        break;
     }
-    catch (const runtime_error& e) {
-        cout << e.what() << endl;
-    }
-};
-
-MAIN DE PRUEBA Y DEMOSTRACION DEL USO DE ADMSYSTEM CON LA PARTE DE AREAS Y VENTANILLAS
-int main() {
-    try {
-            // Inicializacion del sistema de administracion
-            AdmSystem* admControl = new AdmSystem();
-
-            // Agregar areas con sus respectivas ventanillas
-            admControl->addArea("Atencion General", "AG", 3);
-            admControl->addArea("Reclamos", "RC", 2);
-            admControl->addArea("Caja", "CX", 4);
-
-            // Imprimir lista de areas
-            cout << "Lista de areas registradas:" << endl;
-            admControl->printAreas();
-
-            // Consultar las ventanillas de un area especifica
-            cout << "\nVentanillas en el area de Atencion General:" << endl;
-            admControl->printCountersByArea("AG");
-
-            // Limpiar memoria antes de salir
-            delete admControl;
-
-            return 0;
-    }
-    catch (const runtime_error& e) {
-        cout << e.what() << endl;
-    }
-};
-*/
+}
+catch (const runtime_error& e) {
+    cout << "Error: " << e.what() << endl;
+}
+}
+}
