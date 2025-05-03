@@ -270,9 +270,9 @@ public:
 	*/
 	void addTicket(string areaCode, string userType, string serviceDescription) {
 		// Buscar si el código de área ingresado existe
-		Area dummieArea;
-		dummieArea.setCode(areaCode);
-		if (!areas->contains(dummieArea)) {
+		Area dummyArea;
+		dummyArea.setCode(areaCode);
+		if (!areas->contains(dummyArea)) {
 			cout << "Área no encontrada.\n";
 			return;
 		}
@@ -282,7 +282,11 @@ public:
 		for (int i = 0; i < types->getSize(); i++) {
 			types->goToPos(i);
 			if (types->getElement().getDescription() == userType) {
-				userPriority = types->getElement().getPriority();
+				UserType userType = types->getElement();
+				userPriority = userType.getPriority();
+				types->remove();
+				userType.incrementTicketCount();
+				types->insert(userType);
 				break;
 			}
 		}
@@ -296,8 +300,11 @@ public:
 		for (int i = 0; i < services->getSize(); i++) {
 			services->goToPos(i);
 			if (services->getElement().getDescription() == serviceDescription) {
-				servicePriority = services->getElement().getPriority();
-				services->getElement().incrementCount();
+				Service service = services->getElement();
+				servicePriority = service.getPriority();
+				services->remove();
+				service.incrementTicketCount();
+				services->insert(service);
 				break;
 			}
 		}
@@ -411,7 +418,7 @@ public:
 		for (int i = 0; i < services->getSize(); i++) {
 			services->goToPos(i);
 			selectedService = services->getElement();
-			cout << selectedService.getDescription() << ": " << selectedService.getCount() << '\n';
+			cout << selectedService.getDescription() << ": " << selectedService.getTicketCount() << '\n';
 		}
 		cout << '\n';
 

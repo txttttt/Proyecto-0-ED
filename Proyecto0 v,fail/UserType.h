@@ -29,6 +29,14 @@ public:
 	~UserType() {
 	}
 
+	void setDescription(string description) {
+		this->description = description;
+	}
+
+	void setPriority(int priority) {
+		this->priority = priority;
+	}
+
 	string getDescription() {
 		return description;
 	}

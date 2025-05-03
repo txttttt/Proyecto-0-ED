@@ -14,28 +14,28 @@ private:
 	string description;
 	string area;
 	int priority;
-	int count;
+	int ticketCount;
 
 public:
 	Service() {
 		description = "";
 		area = "";
 		priority = 0;
-		count = 0;
+		ticketCount = 0;
 	}
 
 	Service(string description, string area, int priority) {
 		this->description = description;
 		this->area = area;
 		this->priority = priority;
-		count = 0;
+		ticketCount = 0;
 	}
 
 	Service(const Service& other) {
 		description = other.description;
 		area = other.area;
 		priority = other.priority;
-		count = other.count;
+		ticketCount = other.ticketCount;
 	}
 
 	~Service() {
@@ -58,8 +58,8 @@ public:
 		}
 	}
 	
-	void setCount(int count) {
-		this->count = count;
+	void setTicketCount(int ticketCount) {
+		this->ticketCount = ticketCount;
 	}
 
 	string getDescription() {
@@ -74,12 +74,12 @@ public:
 		return priority;
 	}
 
-	int getCount() {
-		return count;
+	int getTicketCount() {
+		return ticketCount;
 	}
 
-	void incrementCount() {
-		count++;
+	void incrementTicketCount() {
+		ticketCount++;
 	}
 
 	void operator=(const Service& other) {

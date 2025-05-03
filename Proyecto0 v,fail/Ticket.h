@@ -21,6 +21,7 @@ using std::ostream;
 using std::time;
 using std::asctime;
 using std::localtime;
+using std::ctime;
 using std::time_t;
 
 class Ticket {
@@ -65,10 +66,6 @@ public:
 		return creation;
 	}
 
-	time_t getCreationFormatted() {
-		return creation;
-	}
-
 	void setFinalPriority(int fp) {
 		this->finalPriority = fp;
 	}
@@ -87,5 +84,5 @@ public:
 };
 
 ostream& operator<<(ostream& os, Ticket& ticket) {
-	return os << "(" << ticket.getCode() << ", " << ticket.getCreationFormatted() << ", " << ticket.getFinalPriority() << ")";
+	return os << "(" << ticket.getCode() << ", " << ticket.getCreation() << ", " << ticket.getFinalPriority() << ")";
 }

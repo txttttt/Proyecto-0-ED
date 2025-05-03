@@ -170,7 +170,7 @@ int main() {
     control->addType("Adulto mayor", 0);
     control->printTypes();
 
-    control->addService("Depósito", "CJ", 2);
+    control->addService("Deposito", "CJ", 2);
     control->addService("Retiro", "CJ", 0);
     control->printServices();
 
