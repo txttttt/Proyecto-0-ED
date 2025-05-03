@@ -1,3 +1,7 @@
+/* Archivo creado por Javier Lee Liang
+* Implementación de los tipos de usuarios
+*/
+
 #pragma once
 
 #include <iostream>

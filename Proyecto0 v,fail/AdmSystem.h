@@ -42,19 +42,19 @@ using std::to_string;
 
 class AdmSystem {
 private:
-	List<UserType>* types;	// Lista de tipos de usuario
+	List<UserType>* types;				// Lista de tipos de usuario
 	List<Ticket>* tickets;				// Lista de tiquetes
 	List<Service>* services;			// Lista de servicios
 	List<Area>* areas;					// Lista de áreas en el sistemaeas en el sistema
-	int ticketCounter;					// Cuenta de tiquetes
+	int ticketCount;					// Cuenta de tiquetes
 
 public:
 	AdmSystem() {
 		tickets = new ArrayList<Ticket>();				// Lista de tiquetes
 		services = new ArrayList<Service>();			// Lista de servicios
-		types = new ArrayList<UserType>();	// Lista de tipos de usuarios
+		types = new ArrayList<UserType>();				// Lista de tipos de usuarios
 		areas = new ArrayList<Area>();					// Lista de áreas en el sistema
-		ticketCounter = 100;
+		ticketCount = 100;
 	}
 
 	~AdmSystem() {
@@ -310,18 +310,18 @@ public:
 		int finalPriority = userPriority * 10 + servicePriority;
 
 		// Generar código único del tiquete
-		string code = areaCode + to_string(ticketCounter);
+		string code = areaCode + to_string(ticketCount);
 
 		// Crear y agregar el tiquete
 		Ticket ticket = Ticket(code, finalPriority);
 		if (tickets->getSize() == 0) {
 			tickets->append(ticket);
-			ticketCounter++;
+			ticketCount++;
 			cout << "Tiquete generado: " << ticket << endl;
 		}
 		else if (!tickets->contains(ticket)) {
 			tickets->append(ticket);
-			ticketCounter++; // Incrementa el contador global
+			ticketCount++; // Incrementa el contador global
 			cout << "Tiquete generado: " << ticket << endl;
 		}
 		else {
@@ -387,6 +387,7 @@ public:
 	void printStatistics() {
 		Area selectedArea;
 		Service selectedService;
+		UserType selectedUserType;
 
 		cout << "Tiempo promedio de cada área: \n";
 		for (int i = 0; i < areas->getSize(); i++) {
@@ -415,6 +416,12 @@ public:
 		cout << '\n';
 
 		cout << "Cantidad de tiquetes emitidos por cada tipo de usuario: \n";
+		for (int i = 0; i < types->getSize(); i++) {
+			types->goToPos(i);
+			selectedUserType = types->getElement();
+			cout << selectedUserType.getDescription() << ": " << selectedUserType.getTicketCount() << '\n';
+		}
+		cout << '\n';
 	}
 
 	//Solicitud de un tiquete
