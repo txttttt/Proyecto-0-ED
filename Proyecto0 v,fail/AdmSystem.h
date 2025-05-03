@@ -26,6 +26,7 @@ Crear timestamp con tiempo actual: https://www.w3schools.com/cpp/cpp_date.asp
 #include "ArrayList.h"
 #include "KVPair.h"
 
+#include "UserType.h"
 #include "Area.h"
 #include "Ticket.h"
 #include "Service.h"
@@ -39,10 +40,9 @@ using std::time;
 using std::time_t;
 using std::to_string;
 
-class AdmSystem
-{
+class AdmSystem {
 private:
-	List<KVPair<string, int>>* types;	// Lista de tipos de usuario
+	List<UserType>* types;	// Lista de tipos de usuario
 	List<Ticket>* tickets;				// Lista de tiquetes
 	List<Service>* services;			// Lista de servicios
 	List<Area>* areas;					// Lista de áreas en el sistemaeas en el sistema
@@ -52,7 +52,7 @@ public:
 	AdmSystem() {
 		tickets = new ArrayList<Ticket>();				// Lista de tiquetes
 		services = new ArrayList<Service>();			// Lista de servicios
-		types = new ArrayList<KVPair<string, int>>();	// Lista de tipos de usuarios
+		types = new ArrayList<UserType>();	// Lista de tipos de usuarios
 		areas = new ArrayList<Area>();					// Lista de áreas en el sistema
 		ticketCounter = 100;
 	}
@@ -88,6 +88,17 @@ public:
 	}
 
 	/*
+	* Limpia todos los tiquetes que se encuentren en cada área presente en el sistema
+	*/
+	void clearAreas() {
+		areas->goToStart();
+		for (int i = 0; i < areas->getSize(); i++) {
+			areas->getElement().deleteTickets();
+			areas->goToPos(i);
+		}
+	}
+
+	/*
 	* Muestra todas las áreas añadidas
 	*/
 	void printAreas() {
@@ -119,7 +130,6 @@ public:
 		cout << "Area no encontrada." << endl;
 	}
 
-
 	/*
 	* Agrega un nuevo tipo de cliente al sistema
 	* @param description Hilera con una descripción para el tipo de cliente
@@ -127,12 +137,12 @@ public:
 	* Da un mensaje de advertencia para cuando el usuario intenta usar addtype para uno ya existente
 	*/
 	void addType(string description, int priority) {
-		KVPair<string, int> pair = KVPair<string, int>(description, priority);
+		UserType userType = UserType(description, priority);
 		if (types->getSize() == 0) {
-			types->append(pair);
+			types->append(userType);
 		}
-		else if (!types->contains(pair)) {
-			types->append(pair);
+		else if (!types->contains(userType)) {
+			types->append(userType);
 		}
 		else {
 			cout << "El tipo de usuario ya existe." << endl;
@@ -149,8 +159,8 @@ public:
 		setlocale(LC_ALL, "");
 		for (int i = 0; i < types->getSize(); i++) {
 			types->goToPos(i);
-			KVPair<string, int> pair = types->getElement();
-			string desc = pair.getKey();
+			UserType userType = types->getElement();
+			string desc = userType.getDescription();
 			if (desc == description) {
 				char confirm;
 				do {
@@ -182,8 +192,71 @@ public:
 			cout << "Lista de Tipos:" << endl;
 			for (int i = 0; i < types->getSize(); i++) {
 				types->goToPos(i);
-				KVPair<string, int> typeSelected = types->getElement();
-				cout << typeSelected.key << '\n';
+				UserType typeSelected = types->getElement();
+				cout << typeSelected.getDescription() << '\n';
+			}
+		}
+	}
+
+	/*
+	* Agrega un nuevo servicio al sistema
+	* @param descripction Hilera con la descripción del servicio a agregar
+	* @param area Hilera que indica el área en donde el servicio tiene que localizarse
+	* @param priority Entero que representa la prioridad del servicio
+	*/
+	void addService(string description, string area, int priority) {
+		Service service = Service(description, area, priority);
+		for (int i = 0; i < services->getSize(); i++) {
+			services->goToPos(i);
+			if ((services->getElement()).getDescription() == description) {
+				cout << "El servicio ya existe." << endl;
+				return;
+			}
+		}
+		services->append(service);
+	}
+
+
+	/*
+	* Elimina un servicio dentro del sistema
+	* @param description Hilera con la descripción del servicio a eliminar
+	*/
+	void deleteService(string description) {
+		for (int i = 0; i < services->getSize(); i++) {
+			services->goToPos(i);
+			if (services->getElement().getDescription() == description) {
+				char confirm;
+				do {
+					cout << "¿Esta seguro de que desea eliminar el servicio " << description << "? (s/n): ";
+					cin >> confirm;
+				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
+
+				if (confirm == 's' || confirm == 'S') {
+					services->remove();
+					tickets->clear();
+					cout << "Servicio eliminado." << endl;
+				}
+				else {
+					cout << "Eliminacion cancelada." << endl;
+				}
+				return;
+			}
+		}
+		cout << "Servicio no encontrado." << endl;
+	}
+
+	// Muestra la lista de servicios
+	// Llama al método print de ArrayList
+	void printServices() {
+		if (services->getSize() == 0) {
+			cout << "No hay servicios registrados.\n";
+		}
+		else {
+			cout << "Lista de Servicios:\n";
+			for (int i = 0; i < services->getSize(); i++) {
+				services->goToPos(i);
+				Service serviceSelected = services->getElement();
+				cout << serviceSelected.getDescription() << '\n';
 			}
 		}
 	}
@@ -208,8 +281,8 @@ public:
 		int userPriority = -1;
 		for (int i = 0; i < types->getSize(); i++) {
 			types->goToPos(i);
-			if (types->getElement().getKey() == userType) {
-				userPriority = types->getElement().getValue();
+			if (types->getElement().getDescription() == userType) {
+				userPriority = types->getElement().getPriority();
 				break;
 			}
 		}
@@ -224,6 +297,7 @@ public:
 			services->goToPos(i);
 			if (services->getElement().getDescription() == serviceDescription) {
 				servicePriority = services->getElement().getPriority();
+				services->getElement().incrementCount();
 				break;
 			}
 		}
@@ -296,71 +370,6 @@ public:
 		}
 	}
 
-
-	/*
-	* Agrega un nuevo servicio al sistema
-	* @param descripction Hilera con la descripción del servicio a agregar
-	* @param area Hilera que indica el área en donde el servicio tiene que localizarse
-	* @param priority Entero que representa la prioridad del servicio
-	*/
-	void addService(string description, string area, int priority) {
-		Service service = Service(description, area, priority);
-		for (int i = 0; i < services->getSize(); i++) {
-			services->goToPos(i);
-			if ((services->getElement()).getDescription() == description) {
-				cout << "El servicio ya existe." << endl;
-				return;
-			}
-		}
-		services->append(service);
-	}
-
-
-	/*
-	* Elimina un servicio dentro del sistema
-	* @param description Hilera con la descripción del servicio a eliminar
-	*/
-	void deleteService(string description) {
-		for (int i = 0; i < services->getSize(); i++) {
-			services->goToPos(i);
-			if (services->getElement().getDescription() == description) {
-				char confirm;
-				do {
-					cout << "¿Esta seguro de que desea eliminar el servicio " << description << "? (s/n): ";
-					cin >> confirm;
-				} while (confirm != 's' && confirm != 'S' && confirm != 'n' && confirm != 'N');
-
-				if (confirm == 's' || confirm == 'S') {
-					services->remove();
-					tickets->clear();
-					cout << "Servicio eliminado." << endl;
-				}
-				else {
-					cout << "Eliminacion cancelada." << endl;
-				}
-				return;
-			}
-		}
-		cout << "Servicio no encontrado." << endl;
-	}
-
-
-	// Muestra la lista de servicios
-	// Llama al método print de ArrayList
-	void printServices() {
-		if (services->getSize() == 0) {
-			cout << "No hay servicios registrados.\n";
-		}
-		else {
-			cout << "Lista de Servicios:\n";
-			for (int i = 0; i < services->getSize(); i++) {
-				services->goToPos(i);
-				Service serviceSelected = services->getElement();
-				cout << serviceSelected.getDescription() << '\n';
-			}
-		}
-	}
-
 	/*
 	* Atiende el tiquete de mayor prioridad de un área 
 	* @param code Hilera con el código del área a atender el tiquete
@@ -376,40 +385,36 @@ public:
 	* Muestra estadísticas de los tiquetes generados, según por área, servicio y tipo de usuario
 	*/
 	void printStatistics() {
+		Area selectedArea;
+		Service selectedService;
+
 		cout << "Tiempo promedio de cada área: \n";
 		for (int i = 0; i < areas->getSize(); i++) {
 			areas->goToPos(i);
-			Area selected = areas->getElement();
-			cout << selected.getDescription() << selected.averageWaitTime() << '\n';
+			selectedArea = areas->getElement();
+			cout << selectedArea.getDescription() << ": " << selectedArea.averageWaitTime() << '\n';
 		}
 		cout << '\n';
 
 		cout << "Cantidad de tiquetes dispensados por área: \n";
 		for (int i = 0; i < areas->getSize(); i++) {
 			areas->goToPos(i);
-			Area selected = areas->getElement();
-			cout << selected.getDescription() << selected.getNumCounter() << '\n';
+			selectedArea = areas->getElement();
+			cout << selectedArea.getDescription() << ": " << selectedArea.getNumCounter() << '\n';
 		}
 		cout << '\n';
 
 		cout << "Cantidad de tiquetes por atendidos por ventanilla: \n";
 
 		cout << "Cantidad de tiquetes solicitados por servicio: \n";
+		for (int i = 0; i < services->getSize(); i++) {
+			services->goToPos(i);
+			selectedService = services->getElement();
+			cout << selectedService.getDescription() << ": " << selectedService.getCount() << '\n';
+		}
+		cout << '\n';
 
 		cout << "Cantidad de tiquetes emitidos por cada tipo de usuario: \n";
-	}
-
-	}
-
-	/*
-	* Limpia todos los tiquetes que se encuentren en cada área presente en el sistema
-	*/
-	void clearAreas() {
-		areas->goToStart();
-		for (int i = 0; i < areas->getSize(); i++) {
-			areas->getElement().deleteTickets();
-			areas->goToPos(i);
-		}
 	}
 
 	//Solicitud de un tiquete

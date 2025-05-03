@@ -14,24 +14,28 @@ private:
 	string description;
 	string area;
 	int priority;
+	int count;
 
 public:
 	Service() {
 		description = "";
 		area = "";
 		priority = 0;
+		count = 0;
 	}
 
 	Service(string description, string area, int priority) {
 		this->description = description;
 		this->area = area;
 		this->priority = priority;
+		count = 0;
 	}
 
 	Service(const Service& other) {
 		description = other.description;
 		area = other.area;
 		priority = other.priority;
+		count = other.count;
 	}
 
 	~Service() {
@@ -53,6 +57,10 @@ public:
 			cout << "Error: La prioridad no puede ser negativa." << endl;
 		}
 	}
+	
+	void setCount(int count) {
+		this->count = count;
+	}
 
 	string getDescription() {
 		return description;
@@ -64,6 +72,14 @@ public:
 
 	int getPriority() {
 		return priority;
+	}
+
+	int getCount() {
+		return count;
+	}
+
+	void incrementCount() {
+		count++;
 	}
 
 	void operator=(const Service& other) {

@@ -49,7 +49,7 @@ private:
     int totalWaitTime;
     int attendedTickets;
     LinkedPriorityQueue<Ticket>* tickets; // Cola de prioridad para tiquetes en el área
-    LinkedList<Counter>* counters; // Lista de ventanillas en el área
+    List<Counter>* counters; // Lista de ventanillas en el área
 
 public:
     Area() {
@@ -108,8 +108,8 @@ public:
         return numCounter; 
     }
 
-    LinkedList<Counter>& getCounters() {
-        return *counters; 
+    List<Counter>& getCounters() {
+        return *counters;
     }
 
     void setDescription(string description) { 

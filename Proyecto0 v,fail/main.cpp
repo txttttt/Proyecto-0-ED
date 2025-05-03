@@ -157,7 +157,7 @@ void static administracion() {
 // ESTADISTICAS
 //-------------------------------------------------------------------------------------------------
 void static estadisticas() {
-
+    control->printStatistics();
 }
 
 // MAIN

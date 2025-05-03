@@ -150,6 +150,7 @@
     <ClInclude Include="Service.h" />
     <ClInclude Include="SortedArrayList.h" />
     <ClInclude Include="Ticket.h" />
+    <ClInclude Include="UserType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
